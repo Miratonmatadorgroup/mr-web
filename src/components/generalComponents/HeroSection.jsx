@@ -12,10 +12,10 @@ import shadowImage from '../../assets/generalImages/shadow.png'
 const HeroSection = () => {
     return (
         <div className='w-full'>
-            <NavBar />
+            {/* <NavBar /> */}
             <div
                 style={{ boxShadow: '0 4px 10px rgba(0,0,0,0.08)' }}
-                className="w-11/12 mx-auto  rounded-md overflow-hidden relative bg-white h-fit py-10 px-5 mt-[6rem]  ">
+                className="w-full  rounded-md overflow-hidden relative bg-white h-fit py-10 px-5 mt-[6rem]  ">
 
                 <img
                     src={smalltopImage}

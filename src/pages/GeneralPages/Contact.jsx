@@ -1,8 +1,11 @@
 import React from 'react'
+import GeneralPageLayout from '../../components/generalComponents/GeneralPageLayout'
 
 const Contact = () => {
   return (
-    <div>Contact</div>
+    <GeneralPageLayout>
+      <div>Contact</div>
+    </GeneralPageLayout>
   )
 }
 

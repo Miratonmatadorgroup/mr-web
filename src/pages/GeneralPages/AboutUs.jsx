@@ -1,8 +1,11 @@
 import React from 'react'
+import GeneralPageLayout from '../../components/generalComponents/GeneralPageLayout'
 
 const AboutUs = () => {
   return (
-    <div>AboutUs</div>
+    <GeneralPageLayout>
+      <div>AboutUs</div>
+    </GeneralPageLayout>
   )
 }
 
