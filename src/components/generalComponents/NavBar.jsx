@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { FaBars } from "react-icons/fa";
 import logo from '../../assets/generalImages/miraton-logo.png';
 import { IoMdClose } from "react-icons/io";
-import { useLocation, NavLink, Link } from 'react-router-dom';
+import { useLocation, NavLink,  } from 'react-router-dom';
+import { HiBars3BottomRight } from "react-icons/hi2";
 import GreenButton from './GreenButton';
 
 
@@ -62,7 +63,7 @@ const NavBar = () => {
                     {menuOpen ? (
                         <IoMdClose className='text-[var(--primary)] text-4xl' />
                     ) : (
-                        <FaBars className='text-[var(--primary)] text-4xl' />
+                        <HiBars3BottomRight className='text-[var(--primary)] text-4xl' />
                     )}
                 </div>
 

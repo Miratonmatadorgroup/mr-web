@@ -4,16 +4,16 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [
-    react(),  // Required for React projects
+    react(),  
     tailwindcss(),
   ],
   build: {
     outDir: 'dist',
   },
   server: {
-    historyApiFallback: true, // For SPA routing in dev
+    historyApiFallback: true, 
   },
   preview: {
-    historyApiFallback: true, // For SPA routing in preview
+    historyApiFallback: true,
   }
 });
