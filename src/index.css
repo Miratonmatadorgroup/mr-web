@@ -9,7 +9,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --primary: #419712 !important;
+  --primary: #1f502d !important;
   --dark-green: #1f502d !important;
   --dark: #000000 !important;
 }
@@ -90,4 +90,6 @@ body {
   font-family: 'Montserrat', sans-serif !important;
 }
 
-
+html {
+  scroll-behavior: smooth;
+}

@@ -6,7 +6,7 @@ import { MoveToTop } from '../../utils/pageUtils'
 import { useLocation } from 'react-router-dom'
 
 const GeneralPageLayout = ({ children }) => {
-    const location = useLocation()
+    // const location = useLocation()
     const animationRef = useRef(null)
     // function to animate display with a delay on mount/view
     useEffect(() => {
@@ -20,14 +20,14 @@ const GeneralPageLayout = ({ children }) => {
         easing: 'easeInOutQuad',
         delay: 600
       });
-      MoveToTop() //makes each page to start from atop
-    }, [location.pathname])
+  
+    }, [])
     return (
         <div 
         ref={animationRef}
         className='flex items-start flex-col gap-10 overflow-hidden'>
             <NavBar />
-            <div className="w-11/12 mx-auto">{children}</div>
+            <div className="text-white">{children}</div>
             <Footer/>
         </div>
     )

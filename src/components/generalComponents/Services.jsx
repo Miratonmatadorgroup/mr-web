@@ -1,31 +1,29 @@
 import React from 'react'
-import serviceImg1 from '../../assets/generalImages/services1.png'
-import serviceImg2 from '../../assets/generalImages/services2.png'
-import serviceImg3 from '../../assets/generalImages/services3.png'
+
 
 const Services = () => {
-    const services = [
-        {
-            icon: serviceImg1,
-            title: 'Manufacturing',
-            desc: 'We offer a full service from a to z, top quality products with spot on deadlines.'
-        },
-        {
-            icon: serviceImg2,
-            title: 'Energy Engineering',
-            desc: 'We finish all our projects on time and go through with rigorous testing before project delivery.'
-        },
-        {
-            icon: serviceImg3,
-            title: 'Material Engineering',
-            desc: 'Top of the line machinery, highly educated employees and great working environment.'
-        },
-    ]
+    // const services = [
+    //     {
+    //         icon: serviceImg1,
+    //         title: 'Manufacturing',
+    //         desc: 'We offer a full service from a to z, top quality products with spot on deadlines.'
+    //     },
+    //     {
+    //         icon: serviceImg2,
+    //         title: 'Energy Engineering',
+    //         desc: 'We finish all our projects on time and go through with rigorous testing before project delivery.'
+    //     },
+    //     {
+    //         icon: serviceImg3,
+    //         title: 'Material Engineering',
+    //         desc: 'Top of the line machinery, highly educated employees and great working environment.'
+    //     },
+    // ]
     return (
         <div className='w-full py-20'>
             <div className="text-[20px] lg:text-[40px] font-bold solid">Our Services & Solutions</div>
             <div className="lg:mt-20 mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 relative">
-                {services.map((item, i) => {
+                {/* {services.map((item, i) => {
                     const isEven = i % 2 === 0
                     return (
                         <div
@@ -39,7 +37,7 @@ const Services = () => {
                             <div className="">{item.desc}</div>
                         </div>
                     )
-                })}
+                })} */}
             </div>
         </div>
     )

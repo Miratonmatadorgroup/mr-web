@@ -1,17 +1,31 @@
 import React from 'react'
 import HeroSection from '../../components/generalComponents/HeroSection'
-import Services from '../../components/generalComponents/Services'
 import GeneralPageLayout from '../../components/generalComponents/GeneralPageLayout'
+import WhoWeAre from '../../components/generalComponents/WhoWeAre'
+import Solutions from '../../components/generalComponents/Solutions'
+import WhoWeServe from '../../components/generalComponents/WhoWeServe'
+import WhyChooseUs from '../../components/generalComponents/WhyChooseUs'
 
 const HomePage = () => {
   return (
     <GeneralPageLayout>
       <HeroSection />
-      <div className="w-11/12 mx-auto">
-        <Services />
+      <div id="who_we_are" className="w-11/12 mx-auto">
+        <WhoWeAre />
       </div>
+      <div id="solutions">
+        <Solutions />
+      </div>
+      <div id="why_choose_us">
+        <WhyChooseUs />
+      </div>
+      <div id="who_we_serve">
+        <WhoWeServe />
+      </div>
+      {/* <div id="contact">
+        <Contact />
+      </div> */}
     </GeneralPageLayout>
   )
 }
-
 export default HomePage
