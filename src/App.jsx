@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { GeneralPages } from './utils/pageLinks'
+import { GeneralPages } from './utils/pagelinks'
 
 const App = () => {
   return (
