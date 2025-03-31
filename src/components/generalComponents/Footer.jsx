@@ -32,10 +32,10 @@ const Footer = () => {
         { title: 'Contact Us', url: '/contact' },
     ]
     const socials = [
-        {img: <TiSocialFacebook/>,url:'/'},
-        {img: <GrLinkedinOption  />,url:'/'},
-        {img: <FaXTwitter />,url:'/'}
-      ]
+        { img: <TiSocialFacebook />, url: '/' },
+        { img: <GrLinkedinOption />, url: '/' },
+        { img: <FaXTwitter />, url: '/' }
+    ]
     return (
         <div className='w-full bg-[var(--dark-green)] text-white py-10'>
             <div className="w-11/12 mx-auto flex lg:items-center flex-col gap-10">
@@ -72,15 +72,22 @@ const Footer = () => {
                     </div>
                     <div className="">
                         <div className="text-[20px] leading-[1.2] font-bold uppercase">talk to us</div>
-                        <div className="w-full flex items-start flex-col gap-3 mt-5 ">
+                        <div className="w-full flex flex-col gap-3 mt-5">
                             {talkToUs.map((item, i) => (
-                                <>
-                                    {item.url ?
-                                        <Link to={item.url} className="text-sm capitalize" key={i}>{item.title}</Link> :
-                                        <div className="text-sm capitalize" key={i}>{item.title}</div>
-
-                                    }
-                                </>
+                                <React.Fragment key={i}>
+                                    {item.url ? (
+                                        <Link
+                                            to={item.url}
+                                            className="text-sm capitalize whitespace-normal break-words"
+                                        >
+                                            {item.title}
+                                        </Link>
+                                    ) : (
+                                        <div className="text-sm capitalize whitespace-normal break-words">
+                                            {item.title}
+                                        </div>
+                                    )}
+                                </React.Fragment>
                             ))}
                         </div>
                     </div>
@@ -90,7 +97,7 @@ const Footer = () => {
                     <img src={logo} alt="miraton logo" />
                     <div className="text-sm">© 2025 Miratonrose. All Rights Reserved. </div>
                     <div className="flex items-center gap-2">
-                        {socials.map((item,i) =>(
+                        {socials.map((item, i) => (
                             <Link to={item.url} target='blank' key={i} className="p-2 text-sm rounded-full bg-transparent text-white border">{item.img}
                             </Link>
                         ))}
