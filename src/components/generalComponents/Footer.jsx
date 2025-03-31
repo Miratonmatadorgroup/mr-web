@@ -36,7 +36,7 @@ const Footer = () => {
     ]
 
     return (
-        <div className='w-full text-[var(--dark)] bg-white pt-10 pb-5'>
+        <div className='w-full text-[var(--dark)] bg-white py-10 '>
             <div className="w-11/12 mx-auto ">
 
                 <div className="w-full flex lg:items-center flex-col lg:flex-row gap-10 lg:gap-0">
