@@ -7,7 +7,7 @@ import smallImg from '../../assets/generalImages/solution-small.png'
 
 const Solutions = () => {
   const [active, setActive] = useState(0)
-  const classN = `font-bold leading-[1.2] text-[20px] lg:text-[35px]`
+  const classN = `font-bold leading-[1.2] text-[30px] lg:text-[35px]`
 
   const selectComponent = (i) => {
     setActive(active === i ? null : i);
@@ -74,12 +74,12 @@ const Solutions = () => {
         </div>
         <div className="flex items-center flex-col md:hidden">
         <div className={`${classN} mb-5`}>Our Core Solutions</div>
-        <img src={smallImg} alt="solutions image"  className=''/>
-        <div className="flex flex-col gap-3">
+        <img src={smallImg} alt="solutions image"  className='w-full'/>
+        <div className="flex flex-col gap-3 w-full">
               {Corecomponents.slice(0,1).map((item, i) => (
                 <div
                   key={i}
-                  className="w-[96%] mx-auto px-3 bg-[#0a2914] py-4 "
+                  className=" mx-auto px-3 bg-[#0a2914] py-4 "
                 >
                   {/* Header Row  */}
                   <div
@@ -87,7 +87,7 @@ const Solutions = () => {
                     onClick={() => selectComponent(i)}
                   >
                     {/* Index Number */}
-                    <div className="w-5 h-5 flex-shrink-0 flex items-center justify-center rounded-full bg-[var(--primary)] text-white text-[12px]">
+                    <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center rounded-full bg-[var(--primary)] text-white text-[12px]">
                       {i + 1}
                     </div>
 

@@ -62,12 +62,12 @@ const WhoWeServe = () => {
                         <div className="font-semibold leading-[1.2] lg:w-[65%] text-center text-[25px] w-full lg:text-[30px]">Smart Utilities, Secure Estates, Sustainable Energy. All in One Platform</div>
                         <div className="flex w-full flex-col md:flex-row items-center justify-center gap-3">
 
-                            <div className={`w-full md:w-fit px-4 py-3 text-[var(--primary)]  text-sm cursor-pointer  hover:scale-105 transition duration-500 ease-in-out flex items-center justify-center gap-2  rounded-md bg-white}`}>
+                            <div className={`w-full md:w-fit px-4 py-3 text-[var(--primary)]   cursor-pointer  hover:scale-105 transition duration-500 ease-in-out flex items-center justify-center gap-2  rounded-md bg-white`}>
                                 <div className="">Get started today</div>
                                 <GoArrowRight className='text-[var(--primary)] font-bold text-2xl' />
                             </div>
 
-                            <button className='w-full md:w-fit cursor-pointer  hover:scale-105 transition duration-500 ease-in-out px-4 py-[.6rem] rounded-md border bg-transparent'> Learn more</button>
+                            <button className='w-full md:w-fit cursor-pointer  hover:scale-105 transition duration-500 ease-in-out px-4 py-[.7rem] rounded-md border bg-transparent'> Learn more</button>
                         </div>
                     </div>
                 </div>
