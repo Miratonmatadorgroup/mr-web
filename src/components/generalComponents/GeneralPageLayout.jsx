@@ -25,7 +25,7 @@ const GeneralPageLayout = ({ children }) => {
     return (
         <div 
         ref={animationRef}
-        className='flex items-start flex-col gap-10'>
+        className='flex items-start flex-col gap-10 overflow-hidden'>
             <NavBar />
             <div className="w-11/12 mx-auto">{children}</div>
             <Footer/>
