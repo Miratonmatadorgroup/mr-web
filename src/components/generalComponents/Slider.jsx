@@ -7,39 +7,9 @@ import "slick-carousel/slick/slick-theme.css";
 export default function SimpleSlider() {
   const sliderRef = React.useRef(null);
 
-  // Custom arrow components
-  const NextArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={`${className} right-0`}
-        style={{ 
-          ...style, 
-          display: "absolute",
-          right: "0px",
-          zIndex: 1
-        }}
-        onClick={onClick}
-      />
-    );
-  };
+  
 
-  const PrevArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={`${className} left-0`}
-        style={{ 
-          ...style, 
-          display: "absolute",
-
-          left: "0px",
-          zIndex: 1
-        }}
-        onClick={onClick}
-      />
-    );
-  };
+  
 
   const settings = {
     dots: false,
@@ -47,9 +17,7 @@ export default function SimpleSlider() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    arrows: false,
     swipe: true,
     touchThreshold: 10,
     draggable: true,
