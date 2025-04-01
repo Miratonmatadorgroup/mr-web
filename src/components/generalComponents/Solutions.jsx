@@ -15,7 +15,7 @@ const Solutions = () => {
   }
 
   return (
-    <div className="w-full relative min-h-[80vh] md:h-fit py-10 md:py-20 bg-cover bg-center" style={{ backgroundImage: `url(${bgframe})` }}>
+    <div className="w-full relative min-h-[75vh] md:h-fit py-10 md:py-20 bg-cover bg-center" style={{ backgroundImage: `url(${bgframe})` }}>
       <div className="w-11/12 mx-auto">
         {/* Desktop View */}
         <div className="md:flex w-full items-center hidden flex-col lg:flex-row gap-10">
