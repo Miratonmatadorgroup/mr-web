@@ -13,7 +13,7 @@ const HomePage = () => {
       <div id="who_we_are" className="w-11/12 mx-auto">
         <WhoWeAre />
       </div>
-      <div id="solutions">
+      <div id="solutions" className='overflow-hidden mx-w-lg'>
         <Solutions />
       </div>
       <div id="why_choose_us">
@@ -22,9 +22,7 @@ const HomePage = () => {
       <div id="who_we_serve">
         <WhoWeServe />
       </div>
-      {/* <div id="contact">
-        <Contact />
-      </div> */}
+    
     </GeneralPageLayout>
   )
 }

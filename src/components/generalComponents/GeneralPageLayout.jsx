@@ -6,9 +6,8 @@ import { MoveToTop } from '../../utils/pageUtils'
 import { useLocation } from 'react-router-dom'
 
 const GeneralPageLayout = ({ children }) => {
-    // const location = useLocation()
     const animationRef = useRef(null)
-    // function to animate display with a delay on mount/view
+    
     useEffect(() => {
       if (animationRef.current) {
         animationRef.current.style.opacity = 0;
@@ -20,15 +19,24 @@ const GeneralPageLayout = ({ children }) => {
         easing: 'easeInOutQuad',
         delay: 600
       });
-  
     }, [])
+
     return (
         <div 
-        ref={animationRef}
-        className='flex items-start flex-col gap-10 overflow-hidden'>
+          ref={animationRef}
+          className='flex flex-col min-h-screen w-full gap-10 overflow-x-hidden'
+          style={{ position: 'relative' }}
+        >
             <NavBar />
-            <div className="text-white">{children}</div>
-            <Footer/>
+            
+            {/* Main Content Area - Critical Fixes Here */}
+            <main className="flex-grow w-full text-white relative z-10">
+              <div className="w-full h-full">
+                {children}
+              </div>
+            </main>
+            
+            <Footer />
         </div>
     )
 }

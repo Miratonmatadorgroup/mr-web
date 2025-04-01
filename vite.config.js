@@ -15,5 +15,6 @@ export default defineConfig({
   },
   preview: {
     historyApiFallback: true,
-  }
+  },
+  assetsInclude: ['**/*.ttf'],
 });
