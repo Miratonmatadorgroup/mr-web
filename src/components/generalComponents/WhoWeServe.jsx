@@ -59,15 +59,17 @@ const WhoWeServe = () => {
                 <div className="w-11/12 mx-auto rounded-xl relative py-10 bg-cover bg-center" style={{ backgroundImage: `url(${bgsmartFrame})` }}>
 
                     <div className="w-11/12 mx-auto flex items-center flex-col gap-10">
-                        <div className="font-semibold leading-[1.2] lg:w-[65%] text-center text-[25px] w-full lg:text-[30px]">Smart Utilities, Secure Estates, Sustainable Energy. All in One Platform</div>
-                        <div className="flex w-full flex-col md:flex-row items-center justify-center gap-3">
-
-                            <div className={`w-full md:w-fit px-4 py-3 text-[var(--primary)]   cursor-pointer  hover:scale-105 transition duration-500 ease-in-out flex items-center justify-center gap-2  rounded-md bg-white`}>
-                                <div className="">Get started today</div>
-                                <GoArrowRight className='text-[var(--primary)] font-bold text-2xl' />
+                        <div className="lg:w-[65%] mx-auto text-center text-[25px] font-bold lg:text-[30px]">
+                            Smart Utilities, Secure Estates, Sustainable Energy. All in One Platform
+                        </div>
+                        <div className="flex w-full md:w-fit flex-col md:flex-row items-center justify-center gap-3">
+                            <div className="w-full md:w-auto px-4 py-3 text-[var(--primary)] cursor-pointer hover:scale-105 transition duration-500 ease-in-out flex items-center justify-center gap-2 rounded-md bg-white">
+                                <div>Get started today</div>
+                                <GoArrowRight className="text-[var(--primary)] font-bold text-2xl" />
                             </div>
-
-                            <button className='w-full md:w-fit cursor-pointer  hover:scale-105 transition duration-500 ease-in-out px-4 py-[.7rem] rounded-md border bg-transparent'> Learn more</button>
+                            <button className="w-full md:w-auto cursor-pointer hover:scale-105 transition duration-500 ease-in-out px-4 py-[.7rem] rounded-md border bg-transparent">
+                                Learn more
+                            </button>
                         </div>
                     </div>
                 </div>
