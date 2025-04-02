@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { FaBars } from "react-icons/fa";
 import logo from '../../assets/generalImages/miraton-logo.png';
 import { IoMdClose } from "react-icons/io";
-import { useLocation, NavLink,  } from 'react-router-dom';
+import { useLocation, NavLink, Link, } from 'react-router-dom';
 import { HiBars3BottomRight } from "react-icons/hi2";
 import GreenButton from './GreenButton';
 
@@ -23,7 +22,7 @@ const NavBar = () => {
         { name: 'Solutions', id: '#solutions' },
         { name: 'Why choose us', id: '#why_choose_us' },
         { name: 'Who we serve', id: '#who_we_serve' },
-        { name: 'Contact us', id: '#contact',url:'/contact' },
+        { name: 'Contact us', id: '#contact', url: '/contact' },
     ];
 
     const handleNavClickSmall = (item) => {
@@ -53,7 +52,9 @@ const NavBar = () => {
         <div className='w-full fixed top-0  z-50  bg-white'>
             {/* Main Navbar Content - Always visible */}
             <div className="w-11/12 mx-auto py-3 flex items-center justify-between relative">
-                <img src={logo} alt="miraton logo" className="h-12" />
+                <Link to={`/`}>
+                    <img src={logo} alt="miraton logo" className="h-12" />
+                </Link>
 
                 {/* Mobile menu button */}
                 <div
