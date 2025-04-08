@@ -87,6 +87,15 @@ html, body, #root {
  overflow-x: clip !important;
 }
 
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+
 html {
   scroll-behavior: smooth;
 }

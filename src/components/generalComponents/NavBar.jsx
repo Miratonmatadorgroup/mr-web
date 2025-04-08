@@ -83,8 +83,8 @@ const NavBar = () => {
 
                 {/* Desktop Buttons */}
                 <div className="lg:flex items-center gap-5 hidden">
-                    <GreenButton text={'Sign in'} border={true} />
-                    <GreenButton text={'Get Started'} />
+                    <Link to={`/signin`}><GreenButton text={'Sign in'} border={true} /></Link>
+                    <Link to={`/signup`}><GreenButton text={'Get Started'} /></Link>
                 </div>
             </div>
 
