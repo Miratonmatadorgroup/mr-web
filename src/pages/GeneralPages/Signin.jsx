@@ -24,7 +24,7 @@ const Signin = () => {
           <img src={imageframe} alt="image frame" className={`h-[100dvh] z-0 rounded-md w-full object-cover`} />
         </div>
         <div className="w-full h-full flex  items-center justify-center">
-          <div className="text-center  flex items-center gap-3 flex-col w-full py-10 ">
+          <div className="text-center  flex items-center gap-3 flex-col w-full py-5 lg:py-10 ">
             <div className="font-semibold text-[var(--dark)] text-[20px]">Sign in to your Account</div>
             <div>Enter your personal data to access your account.</div>
             <div className=" mt-5 flex w-11/12 lg:w-10/12 mx-auto items-start flex-col gap-4">

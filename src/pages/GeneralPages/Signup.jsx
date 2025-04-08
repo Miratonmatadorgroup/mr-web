@@ -57,7 +57,7 @@ const Signin = () => {
                 <div>Enter your personal data to create your account.</div>
                 <div className="mt-5 flex w-11/12 lg:w-10/12 mx-auto items-start flex-col gap-4">
 
-                  <div className="flex items-center text-[var(--dark)] justify-between gap-5 w-full">
+                  <div className="flex items-center flex-col lg:flex-row text-[var(--dark)] justify-between gap-5 w-full">
                     <div className="w-full">
                       <FormInput label="First Name" placeholder="e.g Raheem" />
                     </div>
@@ -122,36 +122,39 @@ const Signin = () => {
             )}
 
             {screen === 2 && (
-              <div className="h-[80dvh] overflow-hidden  flex items-center justify-center w-full">
-                <div className="w-11/12 lg:w-10/12 mx-auto ">
-                  <div className="flex flex-col items-center w-full gap-2 text-center">
-                    <div className="font-semibold text-[var(--dark)] text-[28px]">
-                      Verify your email
+              <div className="h-[70dvh] w-full flex items-center justify-center overflow-hidden">
+                <div className="w-full h-1/2 flex items-center justify-center ">
+                  <div className="w-11/12 lg:w-10/12 max-w-md h-fit mx-auto">
+                    <div className="flex flex-col items-center w-full gap-2 text-center">
+                      <div className="font-semibold text-[var(--dark)] text-[28px]">
+                        Verify your email
+                      </div>
+                      <div>
+                        An OTP has been sent to your mail, kindly provide it here.
+                      </div>
                     </div>
-                    <div>
-                      An OTP has been sent to your mail, kindly provide it here.
-                    </div>
-                  </div>
 
-                  <div className="flex flex-col w-full items-start gap-5 mt-6">
-                    <div className="w-full">
-                      <FormInput label="OTP" placeholder="123-456" />
+                    <div className="flex flex-col w-full items-start gap-5 mt-6">
+                      <div className="w-full">
+                        <FormInput label="OTP" placeholder="123-456" />
+                      </div>
+                      <FormButton onClick={() => setScreen(3)} type="button" title="Verify" />
                     </div>
-                    <FormButton onClick={() => setScreen(3)} type="button" title="Verify" />
                   </div>
                 </div>
               </div>
+
             )}
 
             {screen === 3 &&
               <>
-                <div className="h-[80dvh] overflow-hidden  flex items-center justify-center w-full">
+                <div className="h-[70dvh] overflow-hidden  flex items-center justify-center w-full">
                   <div className="w-10/12 mx-auto">
                     <div className="flex items-center flex-col">
                       <div className="font-semibold text-[var(--dark)] text-[20px]">Complete your details</div>
-                      <div className="">Enter your resiidential information to use  services tailored for you</div>
+                      <div className="text-center">Enter your resiidential information to use  services tailored for you</div>
                     </div>
-                    <div className="mt-5 flex w-full mx-auto items-start flex-col gap-10">
+                    <div className="mt-10 flex w-full mx-auto items-start flex-col gap-5">
                       <div className="w-full">
                         <FormInput
                           label="House address"
