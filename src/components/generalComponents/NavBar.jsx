@@ -115,12 +115,12 @@ const NavBar = () => {
                         </div>
                     </div>
                     <div className="flex mt-3 w-11/12 mx-auto items-center gap-3 flex-col pb-5">
-                        <button className={`w-full md:w-fit px-4 py-3  cursor-pointer  hover:scale-105 transition duration-500 ease-in-out flex items-center justify-center gap-2  rounded-md bg-white border text-[var(--primary)]}`}>
+                        <Link to={`signin`} className={`w-full md:w-fit px-4 py-3  cursor-pointer  hover:scale-105 transition duration-500 ease-in-out flex items-center justify-center gap-2  rounded-md bg-white border text-[var(--primary)]}`}>
                             Sign in
-                        </button>
-                        <button className={`w-full md:w-fit px-4 py-3  cursor-pointer  hover:scale-105 transition duration-500 ease-in-out flex items-center justify-center gap-2  rounded-md bg-[var(--primary)]  text-white }`}>
+                        </Link>
+                        <Link to={`/signup`} className={`w-full md:w-fit px-4 py-3  cursor-pointer  hover:scale-105 transition duration-500 ease-in-out flex items-center justify-center gap-2  rounded-md bg-[var(--primary)]  text-white }`}>
                             Get started today
-                        </button>
+                        </Link>
 
                     </div>
                 </div>
