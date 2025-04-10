@@ -1,5 +1,5 @@
 //layout type
-export interface GeneralPageLayoutProps {
+export interface PageLayoutProps {
     children: React.ReactNode; 
   }
 
