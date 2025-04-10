@@ -9,6 +9,8 @@ import { IoChevronDown } from "react-icons/io5";
 import { Link, useLocation } from 'react-router-dom';
 import { TbLogout2 } from "react-icons/tb";
 import ModalLayout from '@/utils/ModalLayout';
+import { FaCoins } from "react-icons/fa6";
+import { MdDashboard } from "react-icons/md";
 
 const SideBar = () => {
     const sidebarNavItems = [
@@ -21,10 +23,10 @@ const SideBar = () => {
             url: '/user/fund_wallet'
         },
         {
-            name: "Utilities", icon: <TbBulb className='text-lg' />,
+            name: "Utilities", icon: <MdDashboard className='text-lg' />,
             other: [
-                { name: "Utility 1", icon: <TbBulb className='text-lg' />, url: '/user/utilities' },
-                // { name: "Utility 2", icon: <TbBulb className='text-2xl' />, url: '/user/utilities/2' },
+                { name: "Vend Utility", icon: <TbBulb className='text-lg' />, url: '/user/vend_utility' },
+                { name: "Service Charge", icon: <FaCoins className='text-lg' />, url: '/user/service_charge' },
             ]
         },
         {
@@ -50,7 +52,7 @@ const SideBar = () => {
 
     // Detect if we're on a utilities page to keep the submenu open
     useEffect(() => {
-        if (pathName.includes('/user/utilities')) {
+        if (pathName.includes('/user/vend_utility') || pathName.includes('/user/service_charge')) {
             setOpenUtilities(true);
         }
     }, [pathName]);
@@ -66,15 +68,15 @@ const SideBar = () => {
 
             {logout &&
                 <ModalLayout addclas='w-[90%] md:w-1/2  ' setModal={setLogout}>
-                   <div className="w-full rounded-md p-5 bg-white">
-                    <div className="text-center">Are you sure you want to logout?</div>
-                    <div className="flex items-center mt-5 w-11/12 mx-auto justify-between">
-                      <button 
-                      onClick={() => setLogout(false)}
-                      className='text-white cursor-pointer bg-red-600 rounded-md w-fit px-4 py-2'>Cancel</button>
-                      <button className='text-white cursor-pointer bg-green-600 rounded-md w-fit px-4 py-2'>Confirm logout</button>
+                    <div className="w-full rounded-md p-5 bg-white">
+                        <div className="text-center">Are you sure you want to logout?</div>
+                        <div className="flex items-center mt-5 w-11/12 mx-auto justify-between">
+                            <button
+                                onClick={() => setLogout(false)}
+                                className='text-white cursor-pointer bg-red-600 rounded-md w-fit px-4 py-2'>Cancel</button>
+                            <button className='text-white cursor-pointer bg-green-600 rounded-md w-fit px-4 py-2'>Confirm logout</button>
+                        </div>
                     </div>
-                   </div>
                 </ModalLayout>
             }
 
@@ -116,7 +118,7 @@ const SideBar = () => {
                                         key={subIndex}
                                         className={`w-full text-sm flex items-center gap-4 p-2 rounded-md cursor-pointer ${pathName === subItem.url ? 'bg-[var(--primary)] text-white' : 'hover:bg-[#f5f5f5] '}`}
                                     >
-                                        <div className="text-base">{subItem.icon}</div>
+                                        <div className="">{subItem.icon}</div>
                                         <div className="text-base font-semibold">{subItem.name}</div>
                                     </Link>
                                 ))}

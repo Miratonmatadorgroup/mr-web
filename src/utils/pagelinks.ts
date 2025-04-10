@@ -7,10 +7,11 @@ import Signup from "@/pages/GeneralPages/Signup";
 import Dashboard from "@/pages/AuthPages/Dashboard";
 import ForgotPassword from "@/pages/GeneralPages/ForgotPassword";
 import Wallet from "@/pages/AuthPages/Wallet";
-import Utilities from "@/pages/AuthPages/Utilities";
 import History from "@/pages/AuthPages/History";
 import UserProfile from "@/pages/AuthPages/UserProfile";
 import Help from "@/pages/AuthPages/Help";
+import VendUtility from "@/pages/AuthPages/VendUtility";
+import ServiceCharge from "@/pages/AuthPages/ServiceCharge";
 
 
 export const GeneralPages = [
@@ -27,7 +28,8 @@ export const GeneralPages = [
 export const AuthPages = [  
     {path: `/user/dashboard`, component: Dashboard},
     {path: `/user/fund_wallet`, component: Wallet},
-    {path: `/user/utilities`, component: Utilities},
+    {path: `/user/vend_utility`, component: VendUtility},
+    {path: `/user/service_charge`, component: ServiceCharge},
     {path: `/user/history`, component: History},
     {path: `/user/profile`, component: UserProfile},
     {path: `/user/help`, component: Help},

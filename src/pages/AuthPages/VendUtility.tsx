@@ -1,13 +1,13 @@
 import AuthPageLayout from '@/components/authComponents/AuthPageLayout'
 import React from 'react'
 
-const Utilities = () => {
+const VendUtility = () => {
   return (
     <AuthPageLayout>
-      <div>Utilities</div>
+      <div>VendUtility</div>
 
     </AuthPageLayout>
   )
 }
 
-export default Utilities
+export default VendUtility
