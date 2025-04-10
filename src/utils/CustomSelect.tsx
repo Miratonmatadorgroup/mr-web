@@ -1,6 +1,6 @@
 import { CustomSelectProps } from "@/types/generalPagesTypes";
 import { useState } from "react";
-const CustomSelect = ({ options, onSelect ,label} :CustomSelectProps) => {
+const CustomSelect = ({ options, onSelect ,label,border=false,bg=true} :CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("");
 
@@ -16,7 +16,7 @@ const CustomSelect = ({ options, onSelect ,label} :CustomSelectProps) => {
       {/* Select Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full bg-[#f5f5f5] text-gray-700 cursor-pointer font-medium rounded-lg text-sm px-4 py-3 text-left flex justify-between items-center focus:outline-none"
+        className={`w-full ${bg && 'bg-[#f5f5f5]'} ${border && 'border'} text-gray-700 cursor-pointer font-medium rounded-lg text-sm px-4 py-3 text-left flex justify-between items-center focus:outline-none`}
       >
         {selected || "Select an option"}
         <svg

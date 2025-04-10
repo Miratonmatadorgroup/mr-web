@@ -16,7 +16,8 @@ const SideBar = () => {
     const sidebarNavItems = [
         {
             name: "Home", icon: <FiHome className='text-lg' />,
-            url: '/user/dashboard'
+            url: '/user/dashboard',
+            main:'/user/dashboard/notifications'
         },
         {
             name: "Fund Wallet", icon: <LuWallet className='text-lg' />,
@@ -100,7 +101,7 @@ const SideBar = () => {
                             // Regular menu item without submenu
                             <Link
                                 to={item.url}
-                                className={`w-full flex items-center gap-4 p-2 rounded-md cursor-pointer ${pathName === item.url ? 'bg-[var(--primary)] text-white' : 'hover:bg-[#f5f5f5]'}`}
+                                className={`w-full flex items-center gap-4 p-2 rounded-md cursor-pointer ${pathName === item.url || pathName === item.main ? 'bg-[var(--primary)] text-white' : 'hover:bg-[#f5f5f5]'}`}
                             >
                                 <div className="">{item.icon}</div>
                                 <div className="flex items-center justify-between w-full">

@@ -12,6 +12,7 @@ import UserProfile from "@/pages/AuthPages/UserProfile";
 import Help from "@/pages/AuthPages/Help";
 import VendUtility from "@/pages/AuthPages/VendUtility";
 import ServiceCharge from "@/pages/AuthPages/ServiceCharge";
+import Notifications from "@/pages/AuthPages/Notifications";
 
 
 export const GeneralPages = [
@@ -27,6 +28,7 @@ export const GeneralPages = [
 
 export const AuthPages = [  
     {path: `/user/dashboard`, component: Dashboard},
+    {path: `/user/dashboard/notifications`, component: Notifications},
     {path: `/user/fund_wallet`, component: Wallet},
     {path: `/user/vend_utility`, component: VendUtility},
     {path: `/user/service_charge`, component: ServiceCharge},
