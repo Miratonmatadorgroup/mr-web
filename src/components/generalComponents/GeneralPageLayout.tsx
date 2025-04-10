@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import anime from 'animejs';
-import { GeneralPageLayoutProps } from '@/types/generalPagesTypes';
+import { PageLayoutProps } from '@/types/generalPagesTypes';
 
 
 
-const GeneralPageLayout: React.FC<GeneralPageLayoutProps> = ({ children }) => {
+const GeneralPageLayout: React.FC<PageLayoutProps> = ({ children }) => {
   const animationRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {

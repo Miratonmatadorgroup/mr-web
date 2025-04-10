@@ -1,8 +1,11 @@
 import React from 'react'
+import AuthPageLayout from '../../components/authComponents/AuthPageLayout'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <AuthPageLayout>
+      <div className="">Dashboard</div>
+    </AuthPageLayout>
   )
 }
 
