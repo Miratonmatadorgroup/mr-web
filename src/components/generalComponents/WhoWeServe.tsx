@@ -1,5 +1,6 @@
 import { GoArrowRight } from "react-icons/go";
 import { cn } from "@/utils/cn";
+import QuickPurchase from "@/pages/GeneralPages/QuickPurchase";
 
 const WhoWeServe = () => {
   const serveTemplates = [
@@ -33,7 +34,7 @@ const WhoWeServe = () => {
       <div
         className={cn(
           "w-full relative py-20 bg-cover bg-center",
-          `bg-[url(assets/images/serve-frame.png)]`
+          `bg-[url(/assets/images/serve-frame.png)]`
         )}
       >
         <div className="w-full flex items-center gap-2 flex-col mb-10">
@@ -57,11 +58,12 @@ const WhoWeServe = () => {
           </div>
         </div>
       </div>
+      <QuickPurchase />
       <div className="w-full">
         <div
           className={cn(
             "w-11/12 mx-auto rounded-xl relative py-10 bg-cover bg-center",
-            `bg-[url(assets/images/solutionsframe.png)]`
+            `bg-[url(/assets/images/solutionsframe.png)]`
           )}
         >
           <div className="w-11/12 mx-auto flex items-center flex-col gap-10">
