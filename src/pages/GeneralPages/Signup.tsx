@@ -14,6 +14,7 @@ const Signin = () => {
     firstName: "",
     lastName: "",
     email: "",
+    otp: '',
     password: "",
     role: '',
     estate: "",
@@ -24,6 +25,12 @@ const Signin = () => {
   const navigate = useNavigate()
   const roleOptions = ["Homeowner", "Estate Manager"];
   const estateOptions = ["Ajao", "Ikotun", "Ikorodu", "Ikeja", "Victoria Island", "Lekki"];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setForms((prev) => ({ ...prev, [name]: value }));
+  }
+
 
   return (
     <div className="w-full h-screen ">
@@ -47,7 +54,7 @@ const Signin = () => {
 
         {/* RIGHT SIDE FORM PANEL */}
         <div className="w-full h-full overflow-y-scroll  scrollbar-hidden flex items-start justify-center">
-          <div className={`w-full flex flex-col items-center ${screen === 2 && screen === 3 && 'justify-center h-full'} py-10 gap-3`}>
+          <div className={`w-full flex flex-col items-center ${screen === 2 || screen === 3 && 'justify-center h-full'} py-10 gap-3`}>
 
             {screen === 1 && (
               <>
@@ -59,10 +66,16 @@ const Signin = () => {
 
                   <div className="flex items-center flex-col lg:flex-row text-[var(--dark)] justify-between gap-5 w-full">
                     <div className="w-full">
-                      <FormInput label="First Name" placeholder="e.g Raheem" />
+                      <FormInput
+                        value={forms.firstName}
+                        name="firstName"
+                        label="First Name"
+                        placeholder="e.g Raheem"
+                        onChange={handleChange}
+                      />
                     </div>
                     <div className="w-full">
-                      <FormInput label="Last Name" placeholder="e.g John" />
+                      <FormInput value={forms.lastName} name="lastName" label="Last Name" placeholder="e.g John" />
                     </div>
                   </div>
 
@@ -76,6 +89,9 @@ const Signin = () => {
 
                   <div className="w-full">
                     <FormInput
+                      value={forms.email}
+                      onChange={handleChange}
+                      name="email"
                       label="Email"
                       placeholder="e.g. Raheemjohn@gmail.com"
                     />
@@ -84,6 +100,9 @@ const Signin = () => {
                   <div className="w-full flex items-start flex-col gap-2">
                     <div className="w-full">
                       <FormInput
+                        value={forms.password}
+                        name="password"
+                        onChange={handleChange}
                         label="Password"
                         type="password"
                         placeholder="Enter your password"
@@ -136,7 +155,11 @@ const Signin = () => {
 
                     <div className="flex flex-col w-full items-start gap-5 mt-6">
                       <div className="w-full">
-                        <FormInput label="OTP" placeholder="123-456" />
+                        <FormInput
+                          value={forms.otp}
+                          name="otp"
+                          onChange={handleChange}
+                          label="OTP" placeholder="123-456" />
                       </div>
                       <FormButton onClick={() => setScreen(3)} type="button" title="Verify" />
                     </div>
@@ -157,13 +180,24 @@ const Signin = () => {
                     <div className="mt-10 flex w-full mx-auto items-start flex-col gap-5">
                       <div className="w-full">
                         <FormInput
+                          value={forms.houseAddress}
+                          name="houseAddress"
+                          onChange={handleChange}
                           label="House address"
                           placeholder="enter your house address" />
 
                       </div>
-                      <CustomSelect label={`Select estate`} options={estateOptions} onSelect={(value) => setForms({ ...forms, estate: value })} />
+                      <CustomSelect
+                        label={`Select estate`}
+                        options={estateOptions}
+                        onSelect={(value) => setForms({ ...forms, estate: value })}
+                      />
+
                       <div className="w-full">
                         <FormInput
+                          value={forms.meter_number}
+                          name="meter_number"
+                          onChange={handleChange}
                           label="Prepaid meter number"
                           placeholder="enter your prepaid meter number" />
 

@@ -7,9 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 export default function SimpleSlider() {
   const sliderRef = React.useRef(null);
 
-  
-
-  
 
   const settings = {
     dots: false,

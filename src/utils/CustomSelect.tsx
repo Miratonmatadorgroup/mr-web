@@ -1,10 +1,10 @@
+import { CustomSelectProps } from "@/types/generalPagesTypes";
 import { useState } from "react";
-
-const CustomSelect = ({ options, onSelect ,label}) => {
+const CustomSelect = ({ options, onSelect ,label} :CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("");
 
-  const handleSelect = (option) => {
+  const handleSelect = (option :string) => {
     setSelected(option);
     onSelect(option);
     setIsOpen(false);

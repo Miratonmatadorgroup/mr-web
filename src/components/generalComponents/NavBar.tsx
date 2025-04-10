@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../../assets/generalImages/miraton-logo.png';
 import { IoMdClose } from "react-icons/io";
-import { useLocation, NavLink, Link, } from 'react-router-dom';
+import { useLocation,  Link, } from 'react-router-dom';
 import { HiBars3BottomRight } from "react-icons/hi2";
 import GreenButton from './GreenButton';
 
@@ -24,8 +24,9 @@ const NavBar = () => {
         { name: 'Who we serve', id: '#who_we_serve' },
         { name: 'Contact us', id: '#contact', url: '/contact' },
     ];
-
-    const handleNavClickSmall = (item) => {
+    const isActive = navIcons.some((nav) => location.pathname === nav.url || location.hash === nav.id);
+    const [active,setActive] = useState<number>()   
+    const handleNavClickSmall = (item : any) => {
         if (item.url) {
             window.location.href = item.url;
         } else {
@@ -37,7 +38,7 @@ const NavBar = () => {
         setMenuOpen(false);
     };
 
-    const handleNavClickBig = (item) => {
+    const handleNavClickBig = (item : any) => {
         if (item.url) {
             window.location.href = item.url;
         } else {
@@ -95,10 +96,10 @@ const NavBar = () => {
                     <div className="px-5 pt-5 pb-10">
                         <div className="flex flex-col gap-2">
                             {navIcons.map((item, index) => (
-                                <NavLink
+                                <Link
                                     key={index}
-                                    to={item.url}
-                                    className={({ isActive }) =>
+                                    to={item.url || "#"}
+                                    className={
                                         `flex items-center gap-3 p-3 rounded-lg hover:bg-[#cee6be]
                                         ${isActive ? 'bg-[var(--primary-light)] font-bold' : 'hover:bg-[#cee6be]'}`
                                     }
@@ -110,7 +111,7 @@ const NavBar = () => {
                                     <span className={`text-lg text-[var(--primary)] ${location.pathname === item.url ? 'font-bold' : 'font-medium'}`}>
                                         {item.name}
                                     </span>
-                                </NavLink>
+                                </Link>
                             ))}
                         </div>
                     </div>

@@ -7,10 +7,10 @@ import SimpleSlider from './Slider'
 
 
 const Solutions = () => {
-  const [active, setActive] = useState(0)
+  const [active, setActive] = useState<number | null>(0)
   const classN = `font-bold leading-[1.2] text-[30px] lg:text-[35px] text-white`
 
-  const selectComponent = (i) => {
+  const selectComponent = (i:number):void => {
     setActive(active === i ? null : i)
   }
 

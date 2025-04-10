@@ -4,10 +4,23 @@ import imageframe from "../../assets/generalImages/signin_frame.png";
 import FormInput from "../../utils/FormInput";
 import FormButton from '../../utils/FormButton';
 import { useNavigate } from 'react-router-dom';
+import { ForgotPasswordForms } from '@/types/generalPagesTypes';
 
 const ForgotPassword = () => {
     const [screen, setScreen] = useState(1)
     const navigate = useNavigate()
+    const [forms, setForms] = useState({
+        email: '',
+        otp: '',
+        confirm_password: '',
+        new_password: ''
+    } as ForgotPasswordForms)
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setForms((prev) => ({ ...prev, [name]: value }));
+    };
+
     return (
         <div className="w-full lg:overflow-hidden h-screen ">
             <div className="grid grid-cols-1 h-screen lg:grid-cols-2">
@@ -34,7 +47,13 @@ const ForgotPassword = () => {
 
                                 <div className="flex flex-col w-full items-start gap-5 mt-6">
                                     <div className="w-full">
-                                        <FormInput label="Email" type='email' placeholder="eg. Raheemjohn@gmail.com" />
+                                        <FormInput
+                                            value={forms.email}
+                                            name='email'
+                                            onChange={handleChange}
+                                            label="Email"
+                                            type='email'
+                                            placeholder="eg. Raheemjohn@gmail.com" />
                                     </div>
                                     <FormButton onClick={() => setScreen(2)} type="button" title="Submit" />
                                 </div>
@@ -56,7 +75,12 @@ const ForgotPassword = () => {
 
                                 <div className="flex flex-col w-full items-start gap-5 mt-6">
                                     <div className="w-full">
-                                        <FormInput label="OTP" placeholder="123-456" />
+                                        <FormInput
+                                        name='otp'
+                                        value={forms.otp}
+                                        onChange={handleChange} 
+                                        label="OTP" 
+                                        placeholder="123-456" />
                                     </div>
                                     <FormButton onClick={() => setScreen(3)} type="button" title="Submit" />
                                 </div>
@@ -79,12 +103,24 @@ const ForgotPassword = () => {
                                 <div className="flex flex-col w-full items-start gap-6 mt-8">
                                     <div className="flex items-start flex-col gap-1 w-full">
                                         <div className="w-full">
-                                            <FormInput type='password' placeholder={`enter new password`} label={`New Password`} />
+                                            <FormInput 
+                                            type='password' 
+                                            name='new_password'
+                                            value={forms.new_password}
+                                            onChange={handleChange}
+                                            placeholder={`enter new password`} 
+                                            label={`New Password`} />
                                         </div>
                                         <p className='text-[#6B6B6B]'>Must be at least 8 characters.</p>
                                     </div>
                                     <div className="w-full">
-                                        <FormInput type='password' placeholder={`enter new password`} label={`Confirm New Password`} />
+                                        <FormInput 
+                                        name='confirm_password'
+                                        value={forms.confirm_password}
+                                        onChange={handleChange}
+                                        type='password' 
+                                        placeholder={`enter new password`} 
+                                        label={`Confirm New Password`} />
                                     </div>
 
                                     <FormButton onClick={() => navigate('/signin')} type="button" title="Submit" />

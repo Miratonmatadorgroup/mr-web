@@ -1,15 +1,29 @@
 import React, { useState } from "react";
-import imageframe from "../../assets/generalImages/signin_frame.png";
-import FormInput from "../../utils/FormInput";
-import FormButton from "../../utils/FormButton";
-import GoogleButton from "../../utils/GoogleButton";
+import imageframe from "@/assets/generalImages/signin_frame.png";
+import FormInput from "@/utils/FormInput";
+import FormButton from "@/utils/FormButton";
+import GoogleButton from "@/utils/GoogleButton";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/generalImages/miraton-logo.png";
+import logo from "@/assets/generalImages/miraton-logo.png";
 
 
 
 const Signin = () => {
 
+  interface SigninForms {
+    email: string;
+    password: string;
+  }
+  const [forms, setForms] = useState({
+    email: '',
+    password: ''
+  } as SigninForms)
+
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setForms((prev) => ({ ...prev, [name]: value }));
+  };
 
   const navigate = useNavigate()
   return (
@@ -30,12 +44,24 @@ const Signin = () => {
             <div className=" mt-5 flex w-11/12 lg:w-10/12 mx-auto items-start flex-col gap-4">
 
               <div className="w-full">
-                <FormInput label="Email" placeholder="e.g. Raheemjohn@gmail.com" />
+                <FormInput
+                  name="email"
+                  value={forms.email}
+                  onChange={handleChange}
+                  type="email"
+                  label="Email"
+                  placeholder="e.g. Raheemjohn@gmail.com" />
               </div>
 
               <div className="w-full flex items-start flex-col gap-1">
                 <div className="w-full">
-                  <FormInput label="Password" type="password" placeholder="Enter your password" />
+                  <FormInput
+                    label="Password"
+                    name="password"
+                    value={forms.password}
+                    onChange={handleChange}
+                    type="password"
+                    placeholder="Enter your password" />
                 </div>
                 <div className="w-fit ml-auto">
                   <Link to={`/forgot_password`}>forgot password?</Link>

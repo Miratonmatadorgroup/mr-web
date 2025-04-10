@@ -1,5 +1,8 @@
+import { FormInputProps } from '@/types/generalPagesTypes';
 import React, { useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+
+
 
 const FormInput = ({
     type = 'text',
@@ -12,7 +15,7 @@ const FormInput = ({
     name,
     helpText,
     options = []
-}) => {
+}: FormInputProps) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -31,7 +34,7 @@ const FormInput = ({
                              focus:border-none  rounded "
                             placeholder={placeholder}
                             value={value}
-                            onChange={onChange}
+                            onChange={onChange} // Ensure onChange is passed
                             name={name}
                             required={required}
                             minLength={minLength}
@@ -52,7 +55,7 @@ const FormInput = ({
                         <select
                             className="w-full p-2 bg-gray-50 border rounded "
                             value={value}
-                            onChange={onChange}
+                            onChange={onChange} // Ensure onChange is passed
                             name={name}
                             required={required}
                         >
@@ -79,9 +82,10 @@ const FormInput = ({
                              focus:border-none  rounded"
                             placeholder={placeholder}
                             value={value}
-                            onChange={onChange}
+                            onChange={onChange} 
                             name={name}
                             required={required}
+                            readOnly={!onChange} // Set readOnly if onChange is not provided
                             minLength={minLength}
                         />
                         {helpText && <p className="text-xs text-gray-500 mt-1">{helpText}</p>}

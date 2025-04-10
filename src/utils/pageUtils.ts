@@ -1,10 +1,10 @@
-import enterprise from '../assets/generalImages/enterprise.png'
-import enterprise1 from '../assets/generalImages/enterprise1.png'
-import enterprise2 from '../assets/generalImages/enterprise2.png'
-import enterprise3 from '../assets/generalImages/enterprise3.png'
-import enterprise4 from '../assets/generalImages/enterprise4.png'
-import enterprise5 from '../assets/generalImages/enterprise5.png'
-import enterprise6 from '../assets/generalImages/enterprise6.png'
+import enterprise from '@/assets/generalImages/enterprise.png'
+import enterprise1 from '@/assets/generalImages/enterprise1.png'
+import enterprise2 from '@/assets/generalImages/enterprise2.png'
+import enterprise3 from '@/assets/generalImages/enterprise3.png'
+import enterprise4 from '@/assets/generalImages/enterprise4.png'
+import enterprise5 from '@/assets/generalImages/enterprise5.png'
+import enterprise6 from '@/assets/generalImages/enterprise6.png'
 
 export const MoveToTop = () => {
   document.documentElement.scrollTo({

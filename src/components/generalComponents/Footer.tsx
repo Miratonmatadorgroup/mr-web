@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../../assets/generalImages/miraton-logo.png'
+import logo from '@/assets/generalImages/miraton-logo.png'
 import { TiSocialFacebook } from "react-icons/ti";
 import { GrLinkedinOption } from "react-icons/gr";
 import { FaXTwitter } from "react-icons/fa6";
