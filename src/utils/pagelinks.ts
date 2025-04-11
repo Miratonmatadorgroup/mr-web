@@ -12,6 +12,8 @@ import UserProfile from "@/pages/AuthPages/UserProfile";
 import Help from "@/pages/AuthPages/Help";
 import VendUtility from "@/pages/AuthPages/VendUtility";
 import ServiceCharge from "@/pages/AuthPages/ServiceCharge";
+import ConfirmPurchase from "@/pages/AuthPages/ConfirmPurchase";
+import PendingPurchase from "@/pages/AuthPages/PendingPurchase";
 import Notifications from "@/pages/AuthPages/Notifications";
 import Withdrawals from "@/pages/AuthPages/Withdrawals";
 
@@ -36,6 +38,8 @@ export const AuthPages = [
     {path: `/user/history`, component: History},
     {path: `/user/profile`, component: UserProfile},
     {path: `/user/help`, component: Help},
+    {path: `/user/purchase/confirmation`, component: ConfirmPurchase},
+    {path: `/user/purchase/confirmation/:id`, component: PendingPurchase},
     {path: `/user/withdrawals`, component: Withdrawals},
 
 ]
