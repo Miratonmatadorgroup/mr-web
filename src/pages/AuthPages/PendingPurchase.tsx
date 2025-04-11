@@ -49,27 +49,40 @@ const PendingPurchase = () => {
               />
             </div>
             {success ? (
-              <Notice
-                messages={[
-                  "This token has been sent to your email and phone number. Please keep it safe.",
-                ]}
-              />
+              <>
+                <Notice
+                  messages={[
+                    "This token has been sent to your email and phone number. Please keep it safe.",
+                  ]}
+                />
+                <Button
+                  name="Back"
+                  className="bg-[var(--primary)] text-white w-full p-3 rounded-lg self-center"
+                  loaderColor="#ffffff"
+                  type="button"
+                  isLoading={false}
+                  disabled={false}
+                  onClick={() => navigate(-1)}
+                />
+              </>
             ) : (
-              <Notice
-                messages={[
-                  "Please wait till the coundown is over before you try again or lodge a complaint.",
-                ]}
-              />
+              <>
+                <Notice
+                  messages={[
+                    "Please wait till the coundown is over before you try again or lodge a complaint.",
+                  ]}
+                />
+                <Button
+                  name="Download Receipt"
+                  className="bg-[var(--primary)] text-white w-full p-3 rounded-lg self-center"
+                  loaderColor="#ffffff"
+                  type="button"
+                  isLoading={false}
+                  disabled={false}
+                  onClick={() => console.log("clicked")}
+                />
+              </>
             )}
-            <Button
-              name="Back"
-              className="bg-[var(--primary)] text-white w-full p-3 rounded-lg self-center"
-              loaderColor="#ffffff"
-              type="button"
-              isLoading={false}
-              disabled={false}
-              onClick={() => navigate(-1)}
-            />
           </div>
         </section>
       </section>
