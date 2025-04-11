@@ -13,6 +13,7 @@ import Help from "@/pages/AuthPages/Help";
 import VendUtility from "@/pages/AuthPages/VendUtility";
 import ServiceCharge from "@/pages/AuthPages/ServiceCharge";
 import Notifications from "@/pages/AuthPages/Notifications";
+import Withdrawals from "@/pages/AuthPages/Withdrawals";
 
 
 export const GeneralPages = [
@@ -35,5 +36,6 @@ export const AuthPages = [
     {path: `/user/history`, component: History},
     {path: `/user/profile`, component: UserProfile},
     {path: `/user/help`, component: Help},
+    {path: `/user/withdrawals`, component: Withdrawals},
 
 ]

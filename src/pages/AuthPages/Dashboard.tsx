@@ -16,12 +16,12 @@ export const dashboardUrls = [
   {
     name: "Fund Wallet",
     icon: <LuWallet className='text-lg' />,
-    url: '/user/fund_wallet'
+    url: '/user/dashboard'
   },
   {
     name: "Withdraw",
     icon: <LuArrowUpFromLine className='text-lg' />,
-    url: '/user/withdraw'
+    url: '/user/withdrawals'
   },
   {
     name: "Vend Utility",
@@ -136,10 +136,10 @@ const Dashboard = () => {
             </div>
             <div className="flex items-center gap-3">
               {dashboardUrls.map((item, index) => (
-                <div key={index} className={`flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer ${active === index ? 'bg-[var(--primary)] text-white' : 'border text-[var(--dark)] hover:bg-[var(--primary)]/10'}`} onClick={() => setActive(index)}>
+                <Link to={item.url} key={index} className={`flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer ${active === index ? 'bg-[var(--primary)] text-white' : 'border text-[var(--dark)] hover:bg-[var(--primary)]/10'}`} onClick={() => setActive(index)}>
                   <div className="text-lg">{item.icon}</div>
                   <div className="text-base">{item.name}</div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
