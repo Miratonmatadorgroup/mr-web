@@ -1,15 +1,22 @@
 import AuthPageLayout from "@/components/authComponents/AuthPageLayout";
+import GeneralPageLayout from "@/components/generalComponents/GeneralPageLayout";
 import Button from "@/components/shared/Button";
 import ClipboardCopy from "@/components/shared/ClipboardCopy";
 import InputDisplay from "@/components/shared/InputDisplay";
 import Notice from "@/components/shared/Notice";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ConfirmPurchase = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Scroll to top of the page on mount
+    scrollTo(0, 0);
+  }, []);
   return (
-    <AuthPageLayout>
-      <section className="w-full flex flex-col items-center justify-center py-6 gap-3">
+    <GeneralPageLayout>
+      <section className="w-full flex flex-col items-center justify-center py-6 gap-3 mt-10">
         {/* Header  */}
         <section className="text-gray-950 text-center py-4">
           <h1 className="font-bold text-4xl">Quick Token Purchase</h1>
@@ -55,13 +62,13 @@ const ConfirmPurchase = () => {
               isLoading={false}
               disabled={false}
               onClick={() => {
-                navigate("/user/purchase/confirmation/1234");
+                navigate("/purchase/confirmation/1234");
               }}
             />
           </div>
         </section>
       </section>
-    </AuthPageLayout>
+    </GeneralPageLayout>
   );
 };
 

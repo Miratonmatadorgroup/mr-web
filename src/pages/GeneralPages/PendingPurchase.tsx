@@ -1,9 +1,9 @@
-import AuthPageLayout from "@/components/authComponents/AuthPageLayout";
+import GeneralPageLayout from "@/components/generalComponents/GeneralPageLayout";
 import Button from "@/components/shared/Button";
 import InputDisplay from "@/components/shared/InputDisplay";
 import Notice from "@/components/shared/Notice";
 import Timer from "@/components/shared/Timer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { MdContentCopy } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -13,9 +13,14 @@ const PendingPurchase = () => {
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
 
+  useEffect(() => {
+    // Scroll to top of the page on mount
+    scrollTo(0, 0);
+  }, []);
+
   return (
-    <AuthPageLayout>
-      <section className="w-full flex flex-col items-center justify-center py-6 gap-3">
+    <GeneralPageLayout>
+      <section className="w-full flex flex-col items-center justify-center py-6 gap-3 mt-10">
         <section className="w-4/5 md:w-3/5 mx-auto flex items-center justify-center flex-col border border-gray-200 rounded-xl p-4">
           {success ? (
             <SuccessHeader />
@@ -86,7 +91,7 @@ const PendingPurchase = () => {
           </div>
         </section>
       </section>
-    </AuthPageLayout>
+    </GeneralPageLayout>
   );
 };
 

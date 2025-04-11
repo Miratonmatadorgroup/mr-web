@@ -22,7 +22,7 @@ const QuickPurchase = () => {
 
   const onSubmit = (data: QuickPurchaseFormValues) => {
     console.log("Form submitted", data);
-    navigate("/user/purchase/confirmation");
+    navigate("/purchase/confirmation");
   };
 
   return (
