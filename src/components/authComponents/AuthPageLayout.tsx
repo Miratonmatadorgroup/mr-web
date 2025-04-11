@@ -29,7 +29,7 @@ const AuthPageLayout: React.FC<PageLayoutProps> = ({ children }) => {
           <SideBar />
         </div>
         
-        <div className="flex-1 overflow-y-auto p-4" ref={animationRef}>
+        <div className="flex-1 overflow-y-auto p-4">
           {children}
         </div>
       </div>

@@ -24,6 +24,8 @@ export interface CustomSelectProps {
     options: string[];
     onSelect: (option: string) => void;
     label?: string;
+    border?: boolean;
+    bg?: boolean;
 }
 
 
