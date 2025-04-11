@@ -26,8 +26,8 @@ export const GeneralPages = [
     { path: `/forgot_password`, component: ForgotPassword},
     { path: `/finish_up`, component: FinishSignUp },
     { path: `/contact`, component: Contact },
-    {path: `/purchase/confirmation`, component: ConfirmPurchase},
-    {path: `/purchase/confirmation/:id`, component: PendingPurchase},
+    {path: `/purchase`, component: ConfirmPurchase},
+    {path: `/purchase/confirmation`, component: PendingPurchase},
 
 ]
 

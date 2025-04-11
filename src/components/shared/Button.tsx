@@ -39,8 +39,8 @@ const Button = ({
         <ScaleLoader
           loading={isLoading}
           color={loaderColor}
-          height={20}
-          width={20}
+          height={5}
+          width={5}
           aria-label="Loading Spinner"
           data-testid="loader"
         />

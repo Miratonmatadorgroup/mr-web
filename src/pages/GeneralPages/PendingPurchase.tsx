@@ -1,24 +1,70 @@
 import GeneralPageLayout from "@/components/generalComponents/GeneralPageLayout";
 import Button from "@/components/shared/Button";
-import ClipboardCopy from "@/components/shared/ClipboardCopy";
 import InputDisplay from "@/components/shared/InputDisplay";
 import Notice from "@/components/shared/Notice";
 import Timer from "@/components/shared/Timer";
-import useClipboard from "@/hooks/useClipboard";
+import extractQueryParams from "@/utils/extractQueryParam";
+import ErrorLogger from "@/utils/logger/errorLogger";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
-import { MdContentCopy } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { MdOutlineCancel } from "react-icons/md";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
+const purchaseClientId = import.meta.env.VITE_QUICK_PURCHASE_CLIENT_ID;
+interface SearchParams {
+  meter_number: string;
+  amount: string;
+}
 
+interface NavState {
+  callback_url: string;
+}
 const PendingPurchase = () => {
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
+  const [searchParams] = useSearchParams();
+  const [stop, setStop] = useState(false);
+  const location = useLocation();
+  const { callback_url } = location.state as NavState;
+  const { amount, meter_number } = Object.fromEntries(
+    searchParams.entries()
+  ) as unknown as SearchParams;
+
+  const duration = 1800; // 30 minutes in seconds
+  const dateTime = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "Africa/Lagos" })
+  ).toLocaleString("en-GB");
+
+  const { ref } = extractQueryParams(callback_url);
 
   useEffect(() => {
     // Scroll to top of the page on mount
     scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      try {
+        const response = await axios.get(callback_url, {
+          params: {
+            clientId: purchaseClientId,
+          }
+        });
+        const result = response.data;
+
+        if (result.status === "success") {
+          setSuccess(true);
+          setStop(true);
+          clearInterval(interval);
+        }
+      } catch (error) {
+        ErrorLogger(`Error checking payment status: ${error}`);
+      }
+    }, 10000); // Poll every 10 seconds
+
+    return () => clearInterval(interval);
+  }, [ref]);
 
   return (
     <GeneralPageLayout>
@@ -27,11 +73,15 @@ const PendingPurchase = () => {
           {success ? (
             <SuccessHeader />
           ) : (
-            <PendingHeader duration={120} onStopped={() => setSuccess(true)} />
+            <PendingHeader
+              stop={stop}
+              duration={duration}
+              onStopped={() => setSuccess(true)}
+            />
           )}
           <div className="w-full flex items-start justify-center gap-5 flex-col text-start">
             <div className="border border-gray-200 rounded-lg p-4 w-full flex flex-col gap-1 relative">
-              {success ? (
+              {/* {success ? (
                 <div className="w-full flex flex-col gap-1 text-sm font-medium text-gray-700">
                   <label className="block mb-1">Token</label>
                   <p className="text-gray-950 text-2xl font-bold mb-1 flex items-center gap-2">
@@ -43,40 +93,29 @@ const PendingPurchase = () => {
                   </p>
                 </div>
               ) : (
-                <InputDisplay label="Session ID" value="1234898249" />
-              )}
-              <div className="flex justify-between">
-                <InputDisplay label="Amount" value="#1,000.00" />
-                <InputDisplay label="Units" value="8.51 kWh" />
-              </div>
-              <InputDisplay label="Meter Number" value="1234-5678-910" />
-              <InputDisplay
-                label="Date & Time"
-                value="24/03/2025, 10:28:32 PM"
-              />
+              )} */}
+              <InputDisplay label="Reference" value={ref} />
+              <InputDisplay label="Amount" value={`#${Number(amount) / 100}`} />
+              <InputDisplay label="Meter Number" value={meter_number} />
+              <InputDisplay label="Date & Time" value={dateTime} />
             </div>
             {success ? (
               <>
-                <Notice
-                  messages={[
-                    "This token has been sent to your email and phone number. Please keep it safe.",
-                  ]}
-                />
                 <Button
                   name="Download Receipt"
                   className="bg-[var(--primary)] text-white w-full p-3 rounded-lg self-center"
                   loaderColor="#ffffff"
                   type="button"
                   isLoading={false}
-                  disabled={false}
-                  onClick={() => console.log("clicked")}
+                  disabled={true}
+                  onClick={() => {}}
                 />
               </>
             ) : (
               <>
                 <Notice
                   messages={[
-                    "Please wait till the coundown is over before you try again or lodge a complaint.",
+                    "Please wait till the coundown is over before you try again.",
                   ]}
                 />
                 <Button
@@ -106,9 +145,9 @@ const SuccessHeader = () => {
         <FaRegCheckCircle size={30} />
       </div>
       <div className="text-left">
-        <h1 className="font-bold text-2xl">Vending Successful</h1>
+        <h1 className="font-bold text-2xl">Payment Successful</h1>
         <p className="font-medium opacity-50 text-sm">
-          Your token has been successfully generated.
+          Your token will be sent to your phone number shortly.
         </p>
       </div>
     </section>
@@ -116,22 +155,29 @@ const SuccessHeader = () => {
 };
 
 interface PendingHeaderProps {
+  stop: boolean;
   onStopped?: () => void;
   duration: number;
 }
-const PendingHeader = ({ duration, onStopped }: PendingHeaderProps) => {
+const PendingHeader = ({ stop, duration, onStopped }: PendingHeaderProps) => {
   return (
     <section className="w-full text-gray-950 text-center flex justify-between py-4 px-3">
-      <div className="w-16 h-16 flex items-center justify-center">
-        <PulseLoader color="#FB923C" size={10} />
-      </div>
+      {stop ? (
+        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-red-100 text-red-500">
+          <MdOutlineCancel size={30} />
+        </div>
+      ) : (
+        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-orange-100 text-orange-500">
+          <PulseLoader color="#FB923C" size={10} />
+        </div>
+      )}
       <div>
         <h1 className="font-bold text-2xl">Payment Processing</h1>
         <p className="font-medium opacity-50 text-sm">
           Please hold on while we confirm your payment.
         </p>
       </div>
-      <Timer duration={duration} onStopped={onStopped} />
+      <Timer stop={stop} duration={duration} onStopped={onStopped} />
     </section>
   );
 };

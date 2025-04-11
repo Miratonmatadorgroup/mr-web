@@ -2,11 +2,12 @@ import formatTime from "@/utils/formatTime";
 import { useEffect, useState } from "react";
 
 interface TimerProps {
+  stop: boolean; // flag to stop the timer
   duration: number; // in seconds
   onStopped?: () => void; // optional callback when timer expires
 }
 
-const Timer = ({ duration = 120, onStopped }: TimerProps) => {
+const Timer = ({ duration = 120, onStopped, stop }: TimerProps) => {
   const [remainingTime, setRemainingTime] = useState(duration);
   const [isActive, setIsActive] = useState(true);
 
@@ -14,8 +15,7 @@ const Timer = ({ duration = 120, onStopped }: TimerProps) => {
     const interval = setInterval(() => {
       setRemainingTime((prev) => {
         const newTime = prev - 1;
-        if (newTime === 90 && isActive) {
-          console.log("90 seconds left");
+        if (stop && isActive) {
           setIsActive(false);
           onStopped && onStopped();
         }

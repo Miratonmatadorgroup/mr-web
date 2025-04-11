@@ -9,20 +9,120 @@ import { MdOutlineShield } from "react-icons/md";
 import { TbBolt } from "react-icons/tb";
 import { FaChartArea } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import generateReference from "@/utils/helper/generateReference";
+import axios, { AxiosError } from "axios";
+import ErrorLogger from "@/utils/logger/errorLogger";
+import { useState } from "react";
+const purchaseUrl = import.meta.env.VITE_QUICK_PURCHASE_API_URL;
+const purchaseClientId = import.meta.env.VITE_QUICK_PURCHASE_CLIENT_ID;
+const sheetScriptUrl = import.meta.env.VITE_GOOGLE_SHEET_SCRIPT_URL;
+
+if (!purchaseUrl) {
+  throw new Error(
+    "VITE_QUICK_PURCHASE_API_URL is not defined in the environment variables."
+  );
+}
+if (!purchaseClientId) {
+  throw new Error(
+    "VITE_QUICK_PURCHASE_CLIENT_ID is not defined in the environment variables."
+  );
+}
+if (!sheetScriptUrl) {
+  throw new Error(
+    "VITE_GOOGLE_SHEET_SCRIPT_URL is not defined in the environment variables."
+  );
+}
 
 const QuickPurchase = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isLoading },
+    formState: { errors, isSubmitting },
   } = useForm<QuickPurchaseFormValues>({
     resolver: zodResolver(QuickPurchaseFormSchema),
   });
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const onSubmit = (data: QuickPurchaseFormValues) => {
-    console.log("Form submitted", data);
-    navigate("/purchase/confirmation");
+  const onSubmit = async (data: QuickPurchaseFormValues) => {
+    setIsLoading(true);
+    // Generate a unique reference for the transaction
+    const reference = generateReference();
+    const value = data.meterNumber.replace(/[\s-]/g, ""); // Remove spaces, hyphens, and convert to lowercase
+    // Generate Request Body
+    const body = {
+      clientId: purchaseClientId,
+      webhook_url: "https://localhost:5147/purchase",
+      amount: Number(data.amount) * 100, // Convert to kobo
+      customerName: data.fullName,
+      customerEmail: data.email,
+      customerTelephone: data.phoneNumber,
+      reference,
+      metadata: {
+        reference,
+        order_id: value,
+        meter_number: value,
+        estate_name: data.estateName,
+        created_at: new Date().toISOString(),
+      },
+    };
+
+    try {
+      // Create a FormData object to send the data as multipart/form-data
+      const formData = new FormData();
+      formData.append("reference", reference);
+      formData.append("fullname", data.fullName);
+      formData.append("email", data.email);
+      formData.append("phoneNumber", data.phoneNumber);
+      formData.append("meterNumber", value);
+      formData.append("estateName", data.estateName);
+      formData.append("amount", data.amount.toString());
+      formData.append("status", "Pending");
+      // Send data to Google Sheets
+      const sheetResponse = await axios.post(sheetScriptUrl, formData);
+
+      if (sheetResponse.status !== 200) {
+        ErrorLogger(`Error submitting form: ${sheetResponse.data?.message}`);
+        return;
+      } else if (sheetResponse.status === 200) {
+        // Generate payment account if Google Sheets submission is successful
+        const response = await axios.post(purchaseUrl, body, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.status === 200) {
+          const {
+            account_number,
+            account_name,
+            bank_name,
+            amount,
+            callback_url,
+          } = response.data?.data;
+          navigate(
+            `/purchase?account_number=${account_number}&account_name=${encodeURIComponent(
+              account_name
+            )}&bank_name=${encodeURIComponent(
+              bank_name
+            )}&amount=${amount}&meter_number=${encodeURIComponent(
+              value
+            )}&callback_url=${encodeURIComponent(callback_url)}`
+          );
+        } else {
+          ErrorLogger(
+            `Error generating payment link: ${response.data?.message}`
+          );
+        }
+      }
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        ErrorLogger(`Error submitting form: ${error.response?.data?.message}`);
+        return;
+      }
+      ErrorLogger(`Error submitting form: ${error}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
