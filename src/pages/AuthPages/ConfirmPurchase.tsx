@@ -2,6 +2,7 @@ import AuthPageLayout from "@/components/authComponents/AuthPageLayout";
 import Button from "@/components/shared/Button";
 import ClipboardCopy from "@/components/shared/ClipboardCopy";
 import InputDisplay from "@/components/shared/InputDisplay";
+import Notice from "@/components/shared/Notice";
 import { useNavigate } from "react-router-dom";
 
 const ConfirmPurchase = () => {
@@ -40,7 +41,12 @@ const ConfirmPurchase = () => {
               <InputDisplay label="Bank Name" value="Providus Mfb" />
               <InputDisplay label="Amount" value="#1,000" />
             </div>
-            <Notice />
+            <Notice
+              messages={[
+                "This account is unique to you. Do not share your account details",
+                "Minimum transfer amount is #1,000.",
+              ]}
+            />
             <Button
               name="Confirm Payment"
               className="bg-[var(--primary)] text-white w-full p-3 rounded-lg self-center"
@@ -48,7 +54,9 @@ const ConfirmPurchase = () => {
               type="button"
               isLoading={false}
               disabled={false}
-              onClick={() => {navigate('/user/purchase/confirmation/1234')}}
+              onClick={() => {
+                navigate("/user/purchase/confirmation/1234");
+              }}
             />
           </div>
         </section>
@@ -58,17 +66,3 @@ const ConfirmPurchase = () => {
 };
 
 export default ConfirmPurchase;
-
-const Notice = () => {
-  return (
-    <section className="w-full flex items-start justify-center gap-1 flex-col ">
-      <p>Notice</p>
-      <ul className="w-full list-disc list-inside text-sm font-normal text-gray-700 border border-gray-200 rounded-lg p-3 bg-neutral-100">
-        <li>
-          This account is unique to you. Do not share your account details
-        </li>
-        <li>Minimum transfer amount is #1,000.</li>
-      </ul>
-    </section>
-  );
-};
