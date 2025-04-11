@@ -1,8 +1,10 @@
 import GeneralPageLayout from "@/components/generalComponents/GeneralPageLayout";
 import Button from "@/components/shared/Button";
+import ClipboardCopy from "@/components/shared/ClipboardCopy";
 import InputDisplay from "@/components/shared/InputDisplay";
 import Notice from "@/components/shared/Notice";
 import Timer from "@/components/shared/Timer";
+import useClipboard from "@/hooks/useClipboard";
 import { useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { MdContentCopy } from "react-icons/md";
@@ -34,9 +36,9 @@ const PendingPurchase = () => {
                   <label className="block mb-1">Token</label>
                   <p className="text-gray-950 text-2xl font-bold mb-1 flex items-center gap-2">
                     1234-5678-9101-2345-6789-0123
-                    <MdContentCopy
+                    <ClipboardCopy
+                      text="1234-5678-9101-2345-6789-0123"
                       className="text-gray-500 text-lg cursor-pointer hover:text-gray-700 transition-all duration-200 ease-in-out"
-                      onClick={() => console.log("clicked")}
                     />
                   </p>
                 </div>
@@ -61,13 +63,13 @@ const PendingPurchase = () => {
                   ]}
                 />
                 <Button
-                  name="Back"
+                  name="Download Receipt"
                   className="bg-[var(--primary)] text-white w-full p-3 rounded-lg self-center"
                   loaderColor="#ffffff"
                   type="button"
                   isLoading={false}
                   disabled={false}
-                  onClick={() => navigate(-1)}
+                  onClick={() => console.log("clicked")}
                 />
               </>
             ) : (
@@ -78,13 +80,13 @@ const PendingPurchase = () => {
                   ]}
                 />
                 <Button
-                  name="Download Receipt"
+                  name="Back"
                   className="bg-[var(--primary)] text-white w-full p-3 rounded-lg self-center"
                   loaderColor="#ffffff"
                   type="button"
                   isLoading={false}
                   disabled={false}
-                  onClick={() => console.log("clicked")}
+                  onClick={() => navigate(-1)}
                 />
               </>
             )}

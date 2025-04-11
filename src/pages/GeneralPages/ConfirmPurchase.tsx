@@ -1,4 +1,3 @@
-import AuthPageLayout from "@/components/authComponents/AuthPageLayout";
 import GeneralPageLayout from "@/components/generalComponents/GeneralPageLayout";
 import Button from "@/components/shared/Button";
 import ClipboardCopy from "@/components/shared/ClipboardCopy";
@@ -41,7 +40,7 @@ const ConfirmPurchase = () => {
             <div className="border border-gray-200 rounded-lg p-4 w-full flex flex-col gap-1 relative">
               <ClipboardCopy
                 text="10482840284"
-                className="absolute right-5 top-5"
+                className="bg-green-200 text-green-500 absolute right-5 top-5"
               />
               <InputDisplay label="Account Number" value="01234898249" />
               <InputDisplay label="Account Name" value="Raheem John" />

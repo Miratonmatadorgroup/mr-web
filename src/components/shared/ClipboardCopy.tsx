@@ -1,16 +1,24 @@
+import useClipboard from "@/hooks/useClipboard";
 import { cn } from "@/utils/cn";
+import { IoCheckmarkDone } from "react-icons/io5";
 import { MdContentCopy } from "react-icons/md";
 
 const ClipboardCopy = ({ text, className }: ClipboardCopyProps) => {
+  const { copied, copyToClipboard } = useClipboard();
   return (
     <span
       className={cn(
-        "w-12 h-12 bg-green-200 rounded-full flex items-center justify-center",
+        "w-12 h-12 rounded-full flex items-center justify-center",
         className
       )}
-      onCopy={() => text}
+      onClick={() => copyToClipboard(text)}
+      title="Copy to clipboard"
     >
-      <MdContentCopy className="text-green-500 size-6" />
+      {copied ? (
+        <IoCheckmarkDone className="size-6" />
+      ) : (
+        <MdContentCopy className="size-6" />
+      )}
     </span>
   );
 };
