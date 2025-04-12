@@ -23,7 +23,6 @@ export default defineConfig({
     host: true,
     port: 4173,
     allowedHosts: ["miratonroseafrica.com", "www.miratonroseafrica.com"],
-    https: true,
     historyApiFallback: true,
   },
   assetsInclude: ["**/*.ttf"],
