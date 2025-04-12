@@ -15,7 +15,7 @@ import ErrorLogger from "@/utils/logger/errorLogger";
 import { useState } from "react";
 const purchaseUrl = import.meta.env.VITE_QUICK_PURCHASE_API_URL;
 const purchaseClientId = import.meta.env.VITE_QUICK_PURCHASE_CLIENT_ID;
-const sheetScriptUrl = import.meta.env.VITE_GOOGLE_SHEET_SCRIPT_URL;
+
 
 if (!purchaseUrl) {
   throw new Error(
@@ -27,7 +27,7 @@ if (!purchaseClientId) {
     "VITE_QUICK_PURCHASE_CLIENT_ID is not defined in the environment variables."
   );
 }
-if (!sheetScriptUrl) {
+if (!import.meta.env.VITE_GOOGLE_SHEET_SCRIPT_URL) {
   throw new Error(
     "VITE_GOOGLE_SHEET_SCRIPT_URL is not defined in the environment variables."
   );
@@ -77,42 +77,35 @@ const QuickPurchase = () => {
       formData.append("meterNumber", value);
       formData.append("estateName", data.estateName);
       formData.append("amount", data.amount.toString());
-      formData.append("status", "Pending");
-      // Send data to Google Sheets
-      const sheetResponse = await axios.post(sheetScriptUrl, formData);
+      formData.append("status", "Completed");
+      // Persist form data in local storage
+      localStorage.setItem("quickPurchaseFormData", JSON.stringify(formData));
 
-      if (sheetResponse.status !== 200) {
-        ErrorLogger(`Error submitting form: ${sheetResponse.data?.message}`);
-        return;
-      } else if (sheetResponse.status === 200) {
-        // Generate payment account if Google Sheets submission is successful
-        const response = await axios.post(purchaseUrl, body, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (response.status === 200) {
-          const {
-            account_number,
-            account_name,
-            bank_name,
-            amount,
-            callback_url,
-          } = response.data?.data;
-          navigate(
-            `/purchase?account_number=${account_number}&account_name=${encodeURIComponent(
-              account_name
-            )}&bank_name=${encodeURIComponent(
-              bank_name
-            )}&amount=${amount}&meter_number=${encodeURIComponent(
-              value
-            )}&callback_url=${encodeURIComponent(callback_url)}`
-          );
-        } else {
-          ErrorLogger(
-            `Error generating payment link: ${response.data?.message}`
-          );
-        }
+      // Generate payment account details
+      const response = await axios.post(purchaseUrl, body, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status === 200) {
+        const {
+          account_number,
+          account_name,
+          bank_name,
+          amount,
+          callback_url,
+        } = response.data?.data;
+        navigate(
+          `/purchase?account_number=${account_number}&account_name=${encodeURIComponent(
+            account_name
+          )}&bank_name=${encodeURIComponent(
+            bank_name
+          )}&amount=${amount}&meter_number=${encodeURIComponent(
+            value
+          )}&callback_url=${encodeURIComponent(callback_url)}`
+        );
+      } else {
+        ErrorLogger(`Error generating payment link: ${response.data?.message}`);
       }
     } catch (error: unknown) {
       if (error instanceof AxiosError) {

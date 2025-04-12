@@ -12,6 +12,8 @@ import { MdOutlineCancel } from "react-icons/md";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 const purchaseClientId = import.meta.env.VITE_QUICK_PURCHASE_CLIENT_ID;
+const sheetScriptUrl = import.meta.env.VITE_GOOGLE_SHEET_SCRIPT_URL;
+
 interface SearchParams {
   meter_number: string;
   amount: string;
@@ -49,7 +51,7 @@ const PendingPurchase = () => {
         const response = await axios.get(callback_url, {
           params: {
             clientId: purchaseClientId,
-          }
+          },
         });
         const result = response.data;
 
@@ -57,6 +59,25 @@ const PendingPurchase = () => {
           setSuccess(true);
           setStop(true);
           clearInterval(interval);
+          // Prepare data for Google Sheets
+          const formDataObj = JSON.parse(
+            localStorage.getItem("quickPurchaseFormData") || "{}"
+          );
+          const formData = new FormData();
+          Object.entries(formDataObj).forEach(([key, value]) => {
+            formData.append(key, value as string);
+          });
+          // Send data to Google Sheets
+          const sheetResponse = await axios.post(sheetScriptUrl, formData);
+          if (sheetResponse.status !== 200) {
+            ErrorLogger(
+              `Error submitting form: ${sheetResponse.data?.message}`
+            );
+            return;
+          } else if (sheetResponse.status === 200) {
+            // Clear local storage after successful submission
+            localStorage.removeItem("quickPurchaseFormData");
+          }
         }
       } catch (error) {
         ErrorLogger(`Error checking payment status: ${error}`);
