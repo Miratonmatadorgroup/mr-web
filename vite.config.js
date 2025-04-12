@@ -7,23 +7,24 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url)); 
 
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // Map @ to the src directory
+      "@": path.resolve(__dirname, "./src"), // Map @ to the src directory
     },
   },
   build: {
-    outDir: 'dist',
+    outDir: "dist",
   },
   server: {
     historyApiFallback: true,
   },
   preview: {
+    host: true,
+    port: 4173,
+    allowedHosts: ["miratonroseafrica.com", "www.miratonroseafrica.com"],
+    https: true,
     historyApiFallback: true,
   },
-  assetsInclude: ['**/*.ttf'],
+  assetsInclude: ["**/*.ttf"],
 });
