@@ -132,7 +132,7 @@ const Dashboard = () => {
           <div className="w-full flex items-center justify-between">
             <div className="flex items-start flex-col gap-1">
               <div className="text-[25px] font-bold">Dashboard</div>
-              <div className="">Welcome back, John! Here's an overview of your account.</div>
+              <div className="text-sm md:text-base">Welcome back, John! Here's an overview of your account.</div>
             </div>
             <div className="flex items-center gap-3">
               {dashboardUrls.map((item, index) => (

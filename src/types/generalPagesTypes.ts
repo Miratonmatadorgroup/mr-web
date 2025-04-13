@@ -1,7 +1,7 @@
 //layout type
 export interface PageLayoutProps {
-    children: React.ReactNode; 
-  }
+    children: React.ReactNode;
+}
 
 
 //form input types
@@ -9,11 +9,14 @@ export interface FormInputProps {
     type?: string;
     label: string;
     placeholder?: string;
+    backbg?: boolean;
     value: string | number;
+    errorText?: string,
     onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
     required?: boolean;
     minLength?: number;
     name?: string,
+    bold?: boolean;
     helpText?: string,
     options?: Array<{ value: string | number; label: string }>;
 }
@@ -26,6 +29,7 @@ export interface CustomSelectProps {
     label?: string;
     border?: boolean;
     bg?: boolean;
+    labeltext?: string
 }
 
 

@@ -4,8 +4,7 @@ import { LuWallet } from "react-icons/lu";
 import { TbBulb } from "react-icons/tb";
 import { PiWarningCircle } from "react-icons/pi";
 import { IoIosCheckmarkCircleOutline } from "react-icons/io";
-import { HiArrowLeft } from "react-icons/hi2";
-import { Link } from 'react-router-dom';
+import NavigationHeader from '@/components/shared/NavigationHeader';
 
 
 
@@ -59,17 +58,7 @@ const Notifications = () => {
       <div className='w-full'>
         <div className="flex w-full flex-col gap-10 text-[var(--dark)]">
           <div className="w-full flex flex-col gap-5 md:flex-row md:gap-0 md:items-start justify-between">
-            <div className="flex items-start gap-3">
-              <Link to={`/user/dashboard`} className="flex items-center px-4 py-2 rounded-md cursor-pointer border border-[var(--primary)] justify-center"><HiArrowLeft /></Link>
-
-              <div className="flex items-start flex-col gap-5 ">
-                <div className="flex items-start flex-col gap-1">
-                  <div className="text-[25px] font-bold">Notifications</div>
-                  <div className="">Stay updated with your account activities</div>
-                </div>
-                <div className="py-2 text-sm px-3 bg-[#e0f8e5] rounded-xl">2 unread</div>
-              </div>
-            </div>
+            <NavigationHeader title='Notifications' text='Stay updated with your account activities' url='/user/dashboard' notice={true} noticetext='2 unread'/>
             <div className='w-fit flex items-center gap-3 cursor-pointer px-3 py-2 rounded-md border border-[var(--primary)] text-[var(--primary)]'>
               <TbBulb /> <span>Mark all as read</span>
             </div>

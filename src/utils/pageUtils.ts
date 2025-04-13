@@ -5,6 +5,7 @@ import enterprise3 from '@/assets/generalImages/enterprise3.png'
 import enterprise4 from '@/assets/generalImages/enterprise4.png'
 import enterprise5 from '@/assets/generalImages/enterprise5.png'
 import enterprise6 from '@/assets/generalImages/enterprise6.png'
+import {toast}  from 'sonner'
 
 export const MoveToTop = () => {
   document.documentElement.scrollTo({
@@ -13,6 +14,26 @@ export const MoveToTop = () => {
   })
 }
 
+export const ErrorMessage = (message: string) => {
+  return toast.error(message, {
+    position: "top-center",
+    style: {
+      backgroundColor: "#dc2626", 
+      color: "#ffffff", 
+    },
+  });
+};
+
+export const naira ='₦'
+export const SuccessMessage = (message: string) => {
+  return toast.success(message, {
+    position: "top-center",
+    style: {
+      backgroundColor: "#1f502d", 
+      color: "#ffffff", 
+    },
+  });
+};
 
 export const Corecomponents = [
   {
