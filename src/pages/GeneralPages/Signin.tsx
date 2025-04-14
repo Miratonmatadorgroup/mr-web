@@ -12,6 +12,7 @@ import { Apis, ClientPostApi } from "@/services/API";
 import Cookies from 'js-cookie'
 import { CookieName } from "@/services/API";
 import { jwtDecode } from "jwt-decode";
+import { useUserStore } from "@/store/useUserStore";
 
 
 
@@ -32,6 +33,8 @@ const Signin = () => {
     setForms((prev) => ({ ...prev, [name]: value }));
   };
 
+
+  const setUserProfile = useUserStore((state) => state.setUser);
   const navigate = useNavigate()
   const [loading, setLoading] = useState<boolean>(false)
 
@@ -51,7 +54,7 @@ const Signin = () => {
   };
 
 
-  const signInUser = async (e:React.FormEvent<HTMLFormElement>) => {
+  const signInUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!forms.identifier || !forms.password)
       return ErrorMessage(`All fields are required`);
@@ -70,10 +73,10 @@ const Signin = () => {
         return ErrorMessage(res.message || 'Login failed');
       Cookies.set(CookieName, res.data.token);
       const decoded = decodeToken(res.data.token);
-
+      setUserProfile(res.data.user)
       const findRole = UserRoles.find((item) => item.role === decoded?.role);
       if (findRole) return navigate(`${findRole.url}`);
-      
+
     } catch (error: any) {
       console.log(`failed to login`, error);
       return ErrorMessage(error.message);
@@ -103,7 +106,7 @@ const Signin = () => {
           <img src={imageframe} alt="image frame" className={`h-[100dvh] z-0 rounded-md w-full object-cover`} />
         </div>
         <form onSubmit={signInUser}
-        className="w-full h-full flex  items-center justify-center">
+          className="w-full h-full flex  items-center justify-center">
           <div className="text-center  flex items-center gap-3 flex-col w-full py-5 lg:py-10 ">
             <div className="font-semibold text-[var(--dark)] text-[20px]">Sign in to your Account</div>
             <div>Enter your personal data to access your account.</div>
@@ -136,7 +139,7 @@ const Signin = () => {
 
 
               <div className="w-full ">
-                <FormButton  title={`Sign In`} />
+                <FormButton title={`Sign In`} />
               </div>
             </div>
             <div className="flex items-center gap-4 w-11/12 lg:w-10/12 mt-2">

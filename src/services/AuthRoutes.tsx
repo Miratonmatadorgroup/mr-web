@@ -55,6 +55,7 @@ const AuthRoutes: React.FC<AuthRoutesProps> = ({ children }) => {
             }
 
             //  Set as authenticated if everything checks out
+            
             setIsAuthenticated(true);
         };
 
