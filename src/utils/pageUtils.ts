@@ -14,7 +14,7 @@ export const MoveToTop = () => {
   })
 }
 
-export const ErrorMessage = (message: string) => {
+export const ErrorMessage = (message: string | undefined) => {
   return toast.error(message, {
     position: "top-center",
     style: {
@@ -23,6 +23,22 @@ export const ErrorMessage = (message: string) => {
     },
   });
 };
+
+
+interface Roles {
+  role:string,
+  url:string
+}
+export const UserRoles:Roles[] = [
+  {
+      role: 'user',
+      url: '/user/dashboard'
+  },
+  {
+      role: 'admin',
+      url: '/admin/dashboard'
+  },
+]
 
 export const naira ='₦'
 export const SuccessMessage = (message: string) => {

@@ -125,6 +125,8 @@ const Dashboard = () => {
     setSortConfig({ key: columnName, direction });
 
   };
+
+
   return (
     <AuthPageLayout>
       <div className="w-full">
@@ -232,7 +234,7 @@ const Dashboard = () => {
                 <tbody>
 
                   {dashbOardTransactions.map((item, i) => (
-                    <tr className="border-b border-[#e7e7e7] border-t text-sm ">
+                    <tr key={i} className="border-b border-[#e7e7e7] border-t text-sm ">
                       <td className='px-6 py-3 truncate'>{item.date}</td>
                       <td className='px-6 py-3  capitalize'>{item.type}</td>
                       <td className='px-6 py-3 capitalize'>{item.amount}</td>

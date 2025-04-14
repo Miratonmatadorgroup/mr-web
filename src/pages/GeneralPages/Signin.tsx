@@ -5,17 +5,24 @@ import FormButton from "@/utils/FormButton";
 import GoogleButton from "@/utils/GoogleButton";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "@/assets/generalImages/miraton-logo.png";
+import { ErrorMessage, UserRoles } from "@/utils/pageUtils";
+import ModalLayout from "@/utils/ModalLayout";
+import Loader from "@/utils/Loader/Loader";
+import { Apis, ClientPostApi } from "@/services/API";
+import Cookies from 'js-cookie'
+import { CookieName } from "@/services/API";
+import { jwtDecode } from "jwt-decode";
 
 
 
 const Signin = () => {
 
   interface SigninForms {
-    email: string;
+    identifier: string;
     password: string;
   }
   const [forms, setForms] = useState({
-    email: '',
+    identifier: '',
     password: ''
   } as SigninForms)
 
@@ -26,8 +33,66 @@ const Signin = () => {
   };
 
   const navigate = useNavigate()
+  const [loading, setLoading] = useState<boolean>(false)
+
+
+
+  interface DecodedToken {
+    role: string;
+    [key: string]: any;
+  }
+  const decodeToken = (token: string): DecodedToken | null => {
+    try {
+      return jwtDecode<DecodedToken>(token);
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return null;
+    }
+  };
+
+
+  const signInUser = async (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!forms.identifier || !forms.password)
+      return ErrorMessage(`All fields are required`);
+
+    const formdata = {
+      identifier: forms.identifier,
+      password: forms.password,
+    };
+
+    // return console.log(Apis.user.login)
+    setLoading(true);
+
+    try {
+      const res = await ClientPostApi(Apis.user.login, formdata);
+      if (res.status !== 'success' || !res.data?.token)
+        return ErrorMessage(res.message || 'Login failed');
+      Cookies.set(CookieName, res.data.token);
+      const decoded = decodeToken(res.data.token);
+
+      const findRole = UserRoles.find((item) => item.role === decoded?.role);
+      if (findRole) return navigate(`${findRole.url}`);
+      
+    } catch (error: any) {
+      console.log(`failed to login`, error);
+      return ErrorMessage(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
   return (
     <div className="w-full lg:overflow-hidden h-screen ">
+
+      {loading &&
+        <ModalLayout setModal={setLoading} addclas="w-fit">
+          <Loader title="logging in" />
+        </ModalLayout>
+
+      }
       <div className="grid grid-cols-1 h-screen lg:grid-cols-2">
         <div className="hidden lg:block h-full relative pb-2 ">
           <img src={logo} className='absolute w-[6rem]  top-10 left-20 z-20 ' alt="" />
@@ -37,7 +102,8 @@ const Signin = () => {
           </div>
           <img src={imageframe} alt="image frame" className={`h-[100dvh] z-0 rounded-md w-full object-cover`} />
         </div>
-        <div className="w-full h-full flex  items-center justify-center">
+        <form onSubmit={signInUser}
+        className="w-full h-full flex  items-center justify-center">
           <div className="text-center  flex items-center gap-3 flex-col w-full py-5 lg:py-10 ">
             <div className="font-semibold text-[var(--dark)] text-[20px]">Sign in to your Account</div>
             <div>Enter your personal data to access your account.</div>
@@ -45,11 +111,11 @@ const Signin = () => {
 
               <div className="w-full">
                 <FormInput
-                  name="email"
-                  value={forms.email}
+                  name="identifier"
+                  value={forms.identifier}
                   onChange={handleChange}
                   type="email"
-                  label="Email"
+                  label="Email/Phone"
                   placeholder="e.g. Raheemjohn@gmail.com" />
               </div>
 
@@ -70,7 +136,7 @@ const Signin = () => {
 
 
               <div className="w-full ">
-                <FormButton onClick={() => navigate('/user/dashboard')} type="button" title={`Sign In`} />
+                <FormButton  title={`Sign In`} />
               </div>
             </div>
             <div className="flex items-center gap-4 w-11/12 lg:w-10/12 mt-2">
@@ -83,7 +149,7 @@ const Signin = () => {
               <div className="text-center w-full">Don't have an account? <Link to={`/signup`} className="font-semibold">Sign Up</Link></div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
