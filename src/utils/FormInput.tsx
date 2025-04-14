@@ -12,8 +12,11 @@ const FormInput = ({
     onChange,
     required = false,
     minLength,
+    backbg= true,
+    bold = true,
     name,
     helpText,
+    errorText,
     options = []
 }: FormInputProps) => {
     const [showPassword, setShowPassword] = useState(false);
@@ -46,7 +49,7 @@ const FormInput = ({
                         >
                             {showPassword ? <FiEyeOff size={20} className='cursor-pointer' /> : <FiEye size={20} className='cursor-pointer' />}
                         </button>
-                        {helpText && <p className="text-xs text-gray-500 mt-1">{helpText}</p>}
+                        {helpText && <p className="text-sm font-bold text-gray-500 mt-1">{helpText}</p>}
                     </div>
                 );
             case 'select':
@@ -77,9 +80,8 @@ const FormInput = ({
                     <>
                         <input
                             type={type}
-                            className="!w-full p-3 bg-[#f5f5f5] focus-within:outline-none focus:outline-none focus:ring-0 border-transparent
-                            outline-none focus-border-none text-base
-                             focus:border-none  rounded"
+                            className={`!w-full p-3 ${backbg ? 'bg-[#f5f5f5]  border-transparent  focus-border-none focus:border-none' :'bg-white border border-[var(--gray)]'} focus-within:outline-none focus:outline-none focus:ring-0
+                            outline-none text-base rounded`}
                             placeholder={placeholder}
                             value={value}
                             onChange={onChange} 
@@ -89,6 +91,7 @@ const FormInput = ({
                             minLength={minLength}
                         />
                         {helpText && <p className="text-xs text-gray-500 mt-1">{helpText}</p>}
+                        {errorText && <p className="text-xs text-red-600 mt-1">{errorText}</p>}
                     </>
                 );
         }
@@ -97,7 +100,7 @@ const FormInput = ({
     return (
         <div className="flex items-start flex-col">
             {label && (
-                <label className="block text-sm mb-1 font-semibold">
+                <label className={`block text-sm mb-1 ${bold ? 'font-bold' : ''}`} htmlFor={name}>
                     {label}
                     {required && <span className="text-red-500 ml-1">*</span>}
                 </label>

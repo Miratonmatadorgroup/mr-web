@@ -1,10 +1,10 @@
 import { CustomSelectProps } from "@/types/generalPagesTypes";
 import { useState } from "react";
-const CustomSelect = ({ options, onSelect ,label,border=false,bg=true} :CustomSelectProps) => {
+const CustomSelect = ({ options, onSelect, label, border = false, bg = true, labeltext = 'select an option' }: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("");
 
-  const handleSelect = (option :string) => {
+  const handleSelect = (option: string) => {
     setSelected(option);
     onSelect(option);
     setIsOpen(false);
@@ -12,13 +12,13 @@ const CustomSelect = ({ options, onSelect ,label,border=false,bg=true} :CustomSe
 
   return (
     <div className="relative w-full">
-        <div className="font-semibold text-sm">{label}</div>
+      <div className="font-semibold text-sm">{label}</div>
       {/* Select Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full ${bg && 'bg-[#f5f5f5]'} ${border && 'border'} text-gray-700 cursor-pointer font-medium rounded-lg text-sm px-4 py-3 text-left flex justify-between items-center focus:outline-none`}
+        className={`w-full ${bg && 'bg-[#f5f5f5]'} ${border && 'border border-[var(--gray)]'} text-gray-700 cursor-pointer font-medium rounded-lg text-sm px-4 py-3 text-left flex justify-between items-center focus:outline-none`}
       >
-        {selected || "Select an option"}
+        {selected || labeltext}
         <svg
           className={`w-3 h-3  transition-transform ${isOpen ? "rotate-180" : ""}`}
           aria-hidden="true"
