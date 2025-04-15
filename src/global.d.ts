@@ -24,6 +24,7 @@ interface ImportMetaEnv {
   readonly VITE_QUICK_PURCHASE_API_URL: string;
   readonly VITE_QUICK_PURCHASE_CLIENT_ID: string;
   readonly VITE_GOOGLE_SHEET_SCRIPT_URL: string;
+  readonly VITE_BASE_URL: string;
   // more env variables...
 }
 

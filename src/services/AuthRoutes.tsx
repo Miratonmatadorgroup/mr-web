@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import { CookieName } from './API';
 import { jwtDecode } from 'jwt-decode';
 import { useUserStore } from '@/store/useUserStore';
+import { CookieName } from '@/lib/api';
+import { Roles } from '@/types/auth';
 
 interface TokenPayload {
-    role: string;
+    role: Roles;
     exp: number;
     [key: string]: any;
 }
