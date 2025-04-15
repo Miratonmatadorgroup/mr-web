@@ -16,6 +16,7 @@ import ConfirmPurchase from "@/pages/GeneralPages/ConfirmPurchase";
 import PendingPurchase from "@/pages/GeneralPages/PendingPurchase";
 import Notifications from "@/pages/AuthPages/Notifications";
 import Withdrawals from "@/pages/AuthPages/Withdrawals";
+import VerifyEmail from "@/pages/GeneralPages/VerifyEmail";
 
 
 export const GeneralPages = [
@@ -23,6 +24,7 @@ export const GeneralPages = [
     { path: `/`, component: HomePage },
     { path: `/signin`, component: Signin },
     { path: `/signup`, component: Signup },
+    { path: `/verify_email`, component: VerifyEmail },
     { path: `/forgot_password`, component: ForgotPassword},
     { path: `/finish_up`, component: FinishSignUp },
     { path: `/contact`, component: Contact },

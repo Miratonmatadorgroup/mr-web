@@ -7,7 +7,8 @@ export const CookieName = 'miratonrose48594';
 
 
 const user = 'v1/users/';
-const URL=`https://api.miratonroseafrica.com`
+const admin = 'v1/admin'
+const URL = `https://api.miratonroseafrica.com`
 
 
 // Define route constants

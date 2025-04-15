@@ -12,9 +12,10 @@ const CustomSelect = ({ options, onSelect, label, border = false, bg = true, lab
 
   return (
     <div className="relative w-full">
-      <div className="font-semibold text-sm">{label}</div>
+      <div className="font-semibold text-sm text-start">{label}</div>
       {/* Select Button */}
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full ${bg && 'bg-[#f5f5f5]'} ${border && 'border border-[var(--gray)]'} text-gray-700 cursor-pointer font-medium rounded-lg text-sm px-4 py-3 text-left flex justify-between items-center focus:outline-none`}
       >

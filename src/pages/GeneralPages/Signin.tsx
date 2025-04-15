@@ -16,6 +16,7 @@ import { useUserStore } from "@/store/useUserStore";
 
 
 
+
 const Signin = () => {
 
   interface SigninForms {
@@ -88,7 +89,7 @@ const Signin = () => {
 
 
   return (
-    <div className="w-full lg:overflow-hidden h-screen ">
+    <div className="w-full lg:overflow-hidden ">
 
       {loading &&
         <ModalLayout setModal={setLoading} addclas="w-fit">
@@ -106,8 +107,11 @@ const Signin = () => {
           <img src={imageframe} alt="image frame" className={`h-[100dvh] z-0 rounded-md w-full object-cover`} />
         </div>
         <form onSubmit={signInUser}
-          className="w-full h-full flex  items-center justify-center">
-          <div className="text-center  flex items-center gap-3 flex-col w-full py-5 lg:py-10 ">
+          className="w-full flex flex-col gap-5 py-10 overflow-auto">
+          <div className="flex items-center lg:hidden w-full justify-center">
+            <img src={logo} className='w-[8rem]' alt="" />
+          </div>
+          <div className="text-center border border-[var(--gray)] rounded-md lg:border-none  flex items-center gap-3 flex-col w-11/12 mx-auto py-5 ">
             <div className="font-semibold text-[var(--dark)] text-[20px]">Sign in to your Account</div>
             <div>Enter your personal data to access your account.</div>
             <div className=" mt-5 flex w-11/12 lg:w-10/12 mx-auto items-start flex-col gap-4">
