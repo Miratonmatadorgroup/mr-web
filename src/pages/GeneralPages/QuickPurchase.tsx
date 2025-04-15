@@ -13,6 +13,7 @@ import generateReference from "@/utils/helper/generateReference";
 import axios, { AxiosError } from "axios";
 import ErrorLogger from "@/utils/logger/errorLogger";
 import { useState } from "react";
+import Input from "@/components/shared/Input";
 const purchaseUrl = import.meta.env.VITE_QUICK_PURCHASE_API_URL;
 const purchaseClientId = import.meta.env.VITE_QUICK_PURCHASE_CLIENT_ID;
 
@@ -213,43 +214,5 @@ const QuickPurchase = () => {
   );
 };
 
-interface InputProps {
-  type?: string;
-  label?: string;
-  placeholder?: string;
-  error?: string | boolean;
-  required?: boolean;
-  name: string;
-  value?: string | number | readonly string[] | undefined;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-  className?: string;
-}
-const Input = ({
-  type = "text",
-  label,
-  placeholder,
-  error,
-  required = false,
-  ...props
-}: InputProps) => {
-  return (
-    <div className="w-full flex flex-col gap-1 text-sm font-medium text-gray-700">
-      <label className="block mb-1">
-        {label}
-        {required && <span className="text-red-500">*</span>}
-      </label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        required={required}
-        className={`border border-gray-200 p-2 rounded-md w-full ${
-          error ? "border-red-500" : ""
-        }`}
-        {...props}
-      />
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
-    </div>
-  );
-};
+
 export default QuickPurchase;

@@ -11,8 +11,8 @@ const CustomSelect = ({ options, onSelect, label, border = false, bg = true, lab
   };
 
   return (
-    <div className="relative w-full">
-      <div className="font-semibold text-sm text-start">{label}</div>
+    <div className="relative w-full flex flex-col gap-1">
+      <div className="font-medium text-sm text-gray-700 text-start">{label}</div>
       {/* Select Button */}
       <button
         type="button"

@@ -10,16 +10,6 @@ export enum Roles {
   user = "user",
 }
 
-export interface RegisterUser {
-  firstName: string;
-  lastName: string;
-  userName: string;
-  password: string;
-  email: string;
-  phone: string;
-  role: Roles;
-}
-
 export interface RegisterAdmin {
   firstName: string;
   lastName: string;
@@ -50,4 +40,7 @@ export interface AuthUser {
   refreshToken: string;
 }
 
-
+export interface VerifyOtp {
+  email: string;
+  otp: string;
+}
