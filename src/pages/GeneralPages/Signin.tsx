@@ -13,6 +13,7 @@ import { jwtDecode } from "jwt-decode";
 import { useUserStore } from "@/store/useUserStore";
 import authApi from "@/api/authApi";
 import { CookieName, RefreshCookieName } from "@/lib/api";
+import { ErrorHandler } from "@/utils/logger/errorLogger";
 
 const Signin = () => {
   interface SigninForms {
@@ -69,10 +70,9 @@ const Signin = () => {
       const decoded = decodeToken(res.data.token);
       setUserProfile(res.data.user);
       const findRole = UserRoles.find((item) => item.role === decoded?.role);
-      if (findRole) return navigate(`${findRole.url}`);
+      if (findRole) navigate(`${findRole.url}`);
     } catch (error: any) {
-      console.log(`failed to login`, error);
-      return ErrorMessage(error.message);
+      ErrorHandler(error);
     } finally {
       setLoading(false);
     }

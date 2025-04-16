@@ -35,6 +35,14 @@ export const UserRoles:Roles[] = [
       url: '/user/dashboard'
   },
   {
+      role: 'manager',
+      url: '/user/dashboard'
+  },
+  {
+      role: 'homeOwner',
+      url: '/user/dashboard'
+  },
+  {
       role: 'admin',
       url: '/admin/dashboard'
   },

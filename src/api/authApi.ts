@@ -3,10 +3,20 @@ import {
   Auth,
   AuthUser,
   RegisterAdmin,
-  RegisterUser,
+  Roles,
 } from "@/types/auth";
 import { ClientPostApi } from "./clients";
 import { User } from "@/types/user";
+
+export interface RegisterUser {
+  firstName: string;
+  lastName: string;
+  userName: string;
+  password: string;
+  email: string;
+  phone: string;
+  role: Roles;
+}
 
 const authApi = {
   signInAdmin: async (auth: Auth): Promise<ApiResponse<AuthUser>> => {

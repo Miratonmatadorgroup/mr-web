@@ -12,16 +12,6 @@ interface TokenPayload {
     [key: string]: any;
 }
 
-const isExpired = (token: string): boolean => {
-    try {
-        const decoded: TokenPayload = jwtDecode<TokenPayload>(token);
-        return Date.now() >= decoded.exp * 1000;
-    } catch (error) {
-        console.error('Error decoding token:', error);
-        return true;
-    }
-};
-
 const decodeToken = (token: string): TokenPayload | null => {
     try {
         return jwtDecode<TokenPayload>(token);
@@ -44,13 +34,13 @@ const AuthRoutes: React.FC<AuthRoutesProps> = ({ children }) => {
         const checkAuth = () => {
             const token = Cookies.get(CookieName);
 
-            if (!token || isExpired(token)) {
+            if (!token) {
                 handleUnauthenticated();
                 return;
             }
 
             const decodedToken = decodeToken(token);
-            if (!decodedToken || decodedToken.role !== 'user') {
+            if (!decodedToken || decodedToken.role === 'admin') {
                 handleUnauthenticated();
                 return;
             }
