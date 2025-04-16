@@ -14,8 +14,8 @@ export interface RegisterUser {
   userName: string;
   password: string;
   email: string;
-  phone: string;
-  role: Roles;
+  phone?: string;
+  role: Roles | string;
 }
 
 const authApi = {
@@ -38,6 +38,16 @@ const authApi = {
     const response = await ClientPostApi(`/users/register`, data);
     return response;
   },
+
+  forgetPassword: async (email: string): Promise<ApiResponse> => {
+    const response = await ClientPostApi(`/forget-password`, { email });
+    return response;
+  },
+
+  changePassword: async (email: string, token: string, newPassword: string): Promise<ApiResponse> => {
+    const response = await ClientPostApi(`/reset-password`, { email, token, newPassword });
+    return response;
+  }
 };
 
 export default authApi;

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-enum Roles {
+export enum Roles {
   manager = "manager",
   houseOwner = "houseOwner",
   user = "user",
@@ -25,11 +25,7 @@ export const RegisterUserSchema = z
       .string()
       .min(8, "Confirm Password must be at least 8 characters long"),
     email: z.string().email("Invalid email format"),
-    phone: z
-      .string()
-      .regex(/^0\d{10}$/, "Phone must be 11 digits and start with 0")
-      .optional(),
-    role: z.enum(Object.values(Roles) as [string, ...string[]]),
+    role: z.union([z.nativeEnum(Roles), z.string()]),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords must match",

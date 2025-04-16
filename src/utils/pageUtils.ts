@@ -25,6 +25,7 @@ export const ErrorMessage = (message: string | undefined) => {
 };
 
 
+
 interface Roles {
   role:string,
   url:string
@@ -51,7 +52,7 @@ export const UserRoles:Roles[] = [
 export const naira ='₦'
 export const SuccessMessage = (message: string) => {
   return toast.success(message, {
-    position: "top-center",
+    position: "bottom-right",
     style: {
       backgroundColor: "#1f502d", 
       color: "#ffffff", 

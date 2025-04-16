@@ -17,8 +17,8 @@ import {
 } from "@/utils/validator/signUpUser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import userApi from "@/api/userApi";
 import authApi from "@/api/authApi";
+import { ErrorHandler } from "@/utils/logger/errorLogger";
 
 const Signin = () => {
   const [screen, setScreen] = useState(1);
@@ -56,7 +56,7 @@ const Signin = () => {
       }
       navigate(`/verify_email?email=${encodeURIComponent(data.email)}`);
     } catch (error) {
-      console.error(error);
+      ErrorHandler(error);
     } finally {
       setLoading(false);
     }
@@ -131,7 +131,7 @@ const Signin = () => {
                     setValue(
                       "role",
                       roleOptions.find((option) => option.label === value)
-                        ?.value || ""
+                        ?.value || "user"
                     )
                   }
                   label={`Select Role`}
