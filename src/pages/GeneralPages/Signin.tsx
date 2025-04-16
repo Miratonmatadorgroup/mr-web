@@ -122,8 +122,8 @@ const Signin = () => {
                   name="identifier"
                   value={forms.identifier}
                   onChange={handleChange}
-                  type="email"
-                  label="Email/Phone"
+                  type="text"
+                  label="Email/Username"
                   placeholder="e.g. Raheemjohn@gmail.com"
                 />
               </div>
