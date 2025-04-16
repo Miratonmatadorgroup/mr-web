@@ -6,11 +6,9 @@ interface NavProps {
     url: string | (() => void);
     text: string;
     title: string;
-    notice?: boolean;
-    noticetext?: string;
 }
 
-const NavigationHeader = ({ url, noticetext, text, title, notice }: NavProps) => {
+const NavigationHeader = ({ url, text, title, }: NavProps) => {
     const handleClick = () => {
         if (typeof url === 'function') {
             url(); // Call the function if `url` is a function
@@ -37,12 +35,9 @@ const NavigationHeader = ({ url, noticetext, text, title, notice }: NavProps) =>
 
             <div className="flex items-start flex-col gap-5 ">
                 <div className="flex items-start flex-col gap-1">
-                    <div className="text-[25px] font-bold">{title}</div>
+                    <div className="text-[20px] md:text-[25px] font-bold">{title}</div>
                     <div className="text-sm md:text-base">{text}</div>
                 </div>
-                {notice && (
-                    <div className="py-2 text-sm px-3 bg-[#e0f8e5] rounded-xl">{noticetext}</div>
-                )}
             </div>
         </div>
     );

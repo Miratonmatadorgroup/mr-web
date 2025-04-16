@@ -25,11 +25,11 @@ const AuthPageLayout: React.FC<PageLayoutProps> = ({ children }) => {
       <Header />
       
       <div className="flex flex-1 overflow-hidden">
-        <div className="w-[20%] border-r-2 border-r-[#e7e7e7] overflow-y-auto hidden md:block">
+        <div className="w-[20%] border-r-2 z-50 border-r-[#e7e7e7] overflow-y-auto hidden md:block">
           <SideBar />
         </div>
         
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto p-4 ">
           {children}
         </div>
       </div>

@@ -17,6 +17,7 @@ import PendingPurchase from "@/pages/GeneralPages/PendingPurchase";
 import Notifications from "@/pages/AuthPages/Notifications";
 import Withdrawals from "@/pages/AuthPages/Withdrawals";
 import VerifyEmail from "@/pages/GeneralPages/VerifyEmail";
+import OneTransactionHistory from "@/pages/AuthPages/OneTransactionHistory";
 
 
 export const GeneralPages = [
@@ -40,6 +41,7 @@ export const AuthPages = [
     {path: `/user/vend_utility`, component: VendUtility},
     {path: `/user/service_charge`, component: ServiceCharge},
     {path: `/user/history`, component: History},
+    {path: `/user/history/:slug/:id`, component: OneTransactionHistory},
     {path: `/user/profile`, component: UserProfile},
     {path: `/user/help`, component: Help},
     {path: `/user/withdrawals`, component: Withdrawals},
