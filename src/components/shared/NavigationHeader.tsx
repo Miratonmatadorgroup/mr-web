@@ -1,4 +1,3 @@
-import React from 'react';
 import { HiArrowLeft } from 'react-icons/hi2';
 import { Link } from 'react-router-dom';
 
@@ -26,6 +25,8 @@ const NavigationHeader = ({ url, text, title, }: NavProps) => {
                 </Link>
             ) : (
                 <button
+                    type="button"
+                    title='navigation back'
                     onClick={handleClick}
                     className="flex items-center px-3 py-2 rounded-md cursor-pointer border border-[var(--gray)] justify-center"
                 >

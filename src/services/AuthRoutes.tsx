@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import { CookieName } from './API';
 import { jwtDecode } from 'jwt-decode';
 import { useUserStore } from '@/store/useUserStore';
+import { CookieName } from '@/lib/api';
+import { Roles } from '@/types/auth';
 
 interface TokenPayload {
-    role: string;
+    role: Roles;
     exp: number;
     [key: string]: any;
 }
-
-const isExpired = (token: string): boolean => {
-    try {
-        const decoded: TokenPayload = jwtDecode<TokenPayload>(token);
-        return Date.now() >= decoded.exp * 1000;
-    } catch (error) {
-        console.error('Error decoding token:', error);
-        return true;
-    }
-};
 
 const decodeToken = (token: string): TokenPayload | null => {
     try {
@@ -43,13 +34,13 @@ const AuthRoutes: React.FC<AuthRoutesProps> = ({ children }) => {
         const checkAuth = () => {
             const token = Cookies.get(CookieName);
 
-            if (!token || isExpired(token)) {
+            if (!token) {
                 handleUnauthenticated();
                 return;
             }
 
             const decodedToken = decodeToken(token);
-            if (!decodedToken || decodedToken.role !== 'user') {
+            if (!decodedToken || decodedToken.role === 'admin') {
                 handleUnauthenticated();
                 return;
             }

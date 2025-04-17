@@ -29,7 +29,7 @@ export interface CustomSelectProps {
     label?: string;
     border?: boolean;
     bg?: boolean;
-    labeltext?: string
+    labeltext?: string;
 }
 
 

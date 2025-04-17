@@ -16,13 +16,15 @@ export const MoveToTop = () => {
 
 export const ErrorMessage = (message: string | undefined) => {
   return toast.error(message, {
-    position: "top-center",
+    position: "bottom-center",
     style: {
       backgroundColor: "#dc2626", 
       color: "#ffffff", 
+      border: "1px solid #dc2626",
     },
   });
 };
+
 
 
 interface Roles {
@@ -35,6 +37,14 @@ export const UserRoles:Roles[] = [
       url: '/user/dashboard'
   },
   {
+      role: 'manager',
+      url: '/user/dashboard'
+  },
+  {
+      role: 'homeOwner',
+      url: '/user/dashboard'
+  },
+  {
       role: 'admin',
       url: '/admin/dashboard'
   },
@@ -43,7 +53,7 @@ export const UserRoles:Roles[] = [
 export const naira ='₦'
 export const SuccessMessage = (message: string) => {
   return toast.success(message, {
-    position: "top-center",
+    position: "bottom-right",
     style: {
       backgroundColor: "#1f502d", 
       color: "#ffffff", 

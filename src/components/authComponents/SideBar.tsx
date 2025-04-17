@@ -12,8 +12,8 @@ import ModalLayout from '@/utils/ModalLayout';
 import { FaCoins } from "react-icons/fa6";
 import { MdDashboard } from "react-icons/md";
 import Cookies from 'js-cookie';
-import { CookieName } from '@/services/API';
 import { useUserStore } from '@/store/useUserStore';
+import { CookieName } from '@/lib/api';
 
 
 
