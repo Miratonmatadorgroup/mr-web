@@ -67,6 +67,8 @@ const PendingPurchase = () => {
           Object.entries(formDataObj).forEach(([key, value]) => {
             formData.append(key, value as string);
           });
+          // Send paid amount to Google Sheets
+          formData.set("amount", Number(amount)  / 100 + ""); // Convert to Naira
           // Send data to Google Sheets
           const sheetResponse = await axios.post(sheetScriptUrl, formData);
           if (sheetResponse.status !== 200) {
