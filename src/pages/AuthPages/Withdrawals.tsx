@@ -176,10 +176,18 @@ const Withdrawals = () => {
 
 
     const verifyWithdrawal = () => {
-        if (!forms.amount ||
-            !forms.account_name ||
-            !forms.account_number ||
-            !forms.bank_name) return ErrorMessage('Please fill all required fields')
+        if (selectedOption === 'saved') {
+            if (!forms.amount ||
+                !forms.account_name ||
+                !forms.account_number ||
+                !forms.bank_name) return ErrorMessage('Please fill all required fields')
+        } else {
+            if (!newAccount.account_name ||
+                 !newAccount.account_number ||
+                  !newAccount.bank_name) {
+                return ErrorMessage('Please fill out all new fields')
+            }
+        }
         setScreen(3)
     }
 
@@ -223,7 +231,7 @@ const Withdrawals = () => {
                     <div className="mt-10 border rounded-md border-[var(--gray)] w-full p-2">
                         <div className="w-full flex items-start flex-col gap-3">
                             <div className="flex items-start flex-col gap-1">
-                                <div className="text-[25px] font-bold">Withdraw to Bank Account</div>
+                                <div className="md:text-[25px] text-[20px]  font-bold">Withdraw to Bank Account</div>
                                 <div className="text-sm md:text-base">Enter the amount you want to withdraw</div>
                             </div>
 
@@ -391,8 +399,8 @@ const Withdrawals = () => {
 
             {screen === 4 &&
                 <div className="w-full rounded-md border border-[var(--gray)] p-3">
-                    <div className="flex items-center gap-3">
-                        <div className="bg-[#e0f8e5] flex rounded-full items-center justify-center p-2.5">
+                    <div className="flex md:items-center gap-3">
+                        <div className="bg-[#e0f8e5] flex rounded-full items-center justify-center h-fit p-2.5">
                             <IoIosCheckmarkCircleOutline className='text-[var(--green)]' />
                         </div>
                         <div className="items-start flex-col gap-2">

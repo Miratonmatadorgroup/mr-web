@@ -15,37 +15,44 @@ import Cookies from 'js-cookie';
 import { useUserStore } from '@/store/useUserStore';
 import { CookieName } from '@/lib/api';
 
+
+
+export const sidebarNavItems = [
+    {
+        name: "Home", icon: <FiHome className='text-lg' />,
+        url: '/user/dashboard',
+        main:'/user/dashboard/notifications'
+    },
+    {
+        name: "Fund Wallet", icon: <LuWallet className='text-lg' />,
+        url: '/user/fund_wallet'
+    },
+    {
+        name: "Utilities", icon: <MdDashboard className='text-lg' />,
+        other: [
+            { name: "Vend Utility", icon: <TbBulb className='text-lg' />, url: '/user/vend_utility' },
+            { name: "Service Charge", icon: <FaCoins className='text-lg' />, url: '/user/service_charge' },
+        ],
+        main:''
+    },
+    {
+        name: "History", icon: <LuHistory className='text-lg' />,
+        url: '/user/history',
+        main: '/user/history/'
+    },
+    {
+        name: "Profile", icon: <FiUser className='text-lg' />,
+        url: '/user/profile',
+        main:""
+    },
+    {
+        name: "Help", icon: <MdHelpOutline className='text-lg' />,
+        url: '/user/help',
+        main:''
+    },
+]
 const SideBar = () => {
-    const sidebarNavItems = [
-        {
-            name: "Home", icon: <FiHome className='text-lg' />,
-            url: '/user/dashboard',
-            main:'/user/dashboard/notifications'
-        },
-        {
-            name: "Fund Wallet", icon: <LuWallet className='text-lg' />,
-            url: '/user/fund_wallet'
-        },
-        {
-            name: "Utilities", icon: <MdDashboard className='text-lg' />,
-            other: [
-                { name: "Vend Utility", icon: <TbBulb className='text-lg' />, url: '/user/vend_utility' },
-                { name: "Service Charge", icon: <FaCoins className='text-lg' />, url: '/user/service_charge' },
-            ]
-        },
-        {
-            name: "History", icon: <LuHistory className='text-lg' />,
-            url: '/user/history'
-        },
-        {
-            name: "Profile", icon: <FiUser className='text-lg' />,
-            url: '/user/profile'
-        },
-        {
-            name: "Help", icon: <MdHelpOutline className='text-lg' />,
-            url: '/user/help'
-        },
-    ]
+    
 
     const location = useLocation()
     const pathName = location.pathname
@@ -113,7 +120,7 @@ const SideBar = () => {
                             // Regular menu item without submenu
                             <Link
                                 to={item.url}
-                                className={`w-full flex items-center gap-4 p-2 rounded-md cursor-pointer ${pathName === item.url || pathName === item.main ? 'bg-[var(--primary)] text-white' : 'hover:bg-[#f5f5f5]'}`}
+                                className={`w-full flex items-center gap-4 p-2 rounded-md cursor-pointer ${pathName === item.url ||  (item.main && pathName.includes(item.main))? 'bg-[var(--primary)] text-white' : 'hover:bg-[#f5f5f5]'}`}
                             >
                                 <div className="">{item.icon}</div>
                                 <div className="flex items-center justify-between w-full">

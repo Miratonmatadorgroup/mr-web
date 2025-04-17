@@ -30,9 +30,8 @@ const FormInput = ({
           <div className="relative !w-full">
             <input
               type={showPassword ? "text" : "password"}
-              className="w-full p-3 bg-[#f5f5f5] focus-within:outline-none focus:outline-none focus:ring-0 border-transparent
-                            outline-none focus-border-none text-base
-                             focus:border-none  rounded "
+              className={`!w-full p-3 ${backbg ? 'bg-[#f5f5f5]  border-transparent  focus-border-none focus:border-none' :'bg-white border border-[var(--gray)]'} focus-within:outline-none focus:outline-none focus:ring-0
+                            outline-none text-base rounded`}
               placeholder={placeholder}
               value={value}
               onChange={onChange} // Ensure onChange is passed
@@ -125,7 +124,7 @@ const FormInput = ({
     <div className="flex items-start flex-col">
       {label && (
         <label
-          className={`block text-sm mb-1 ${bold ? "font-bold" : ""}`}
+          className={`block text-sm capitalize mb-1 ${bold ? "font-bold" : ""}`}
           htmlFor={name}
         >
           {label}

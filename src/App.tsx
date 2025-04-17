@@ -11,7 +11,7 @@ const App = () => {
           <Route key={index} path={item.path} element={<item.component />} />
         ))}
         {AuthPages.map((item, index) => (
-          <Route key={index} path={item.path} element={<AuthRoutes><item.component /></AuthRoutes>} />
+          <Route key={index} path={item.path} element={<item.component />} />
         ))}
       </Routes>
     </BrowserRouter>
