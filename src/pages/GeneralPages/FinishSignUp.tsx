@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import { useCallback, useState } from "react";
 import frame from "../../assets/generalImages/signup_bg.png";
 import logo from "../../assets/generalImages/miraton-logo.png";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import FormInput from "@/utils/FormInput";
+import { Link, useLocation } from "react-router-dom";
 import CustomSelect from "@/utils/CustomSelect";
-import FormButton from "@/utils/FormButton";
 import imageframe from "../../assets/generalImages/signin_frame.png";
-import { ErrorMessage } from "@/utils/pageUtils";
 import ModalLayout from "@/utils/ModalLayout";
 import Loader from "@/utils/Loader/Loader";
 import { useForm } from "react-hook-form";
@@ -19,10 +16,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@/components/shared/Input";
 import Button from "@/components/shared/Button";
 import { cn } from "@/utils/cn";
+import { usePropertyStore } from "@/store/usePropertyStore";
+import { Property, PropertyType } from "@/types/property";
+import houseApi from "@/api/houseApi";
+import { ErrorHandler } from "@/utils/logger/errorLogger";
+import { House } from "@/types/house";
+import authApi from "@/api/authApi";
+import { ErrorMessage } from "@/utils/pageUtils";
 
 const FinishSignUp = () => {
   const [screen, setScreen] = useState(1);
   const [loading, setLoading] = useState(false);
+  const properties = usePropertyStore((state) => state.properties);
+  const [houses, setHouses] = useState<House[]>([]);
+
+  // Form states
   const {
     register,
     handleSubmit,
@@ -31,29 +39,63 @@ const FinishSignUp = () => {
   } = useForm<FinishSignupValues>({
     resolver: zodResolver(finishSignupSchema),
   });
-  const estateOptions = [
-    "Ajao",
-    "Ikotun",
-    "Ikorodu",
-    "Ikeja",
-    "Victoria Island",
-    "Lekki",
-  ];
+
+  const estateOptions = properties.map((property) => property.name);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const email = queryParams.get("email");
+  if (email) {
+    setValue("email", email); // Set the email value in the form
+  }
 
   const onSubmit = async (data: FinishSignupValues) => {
     setLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      setScreen(2);
+      const res = await authApi.addHouseDetails(data);
+      if (res.error) {
+        ErrorMessage(res.message);
+        return;
+      } else {
+        setScreen(2);
+      }
     } catch (error) {
-      console.log(error);
+      ErrorHandler(error);
     } finally {
       setLoading(false);
     }
   };
+
+  const handleEstateSelection = async (selectedOption: string) => {
+    setValue("house", ""); // Reset the house address when estate changes
+    setHouses([]); // Clear the house options array
+    const selectedProperty = properties.find(
+      (property: Property) => property.name === selectedOption
+    );
+    setValue("estate", selectedProperty?.id || "");
+    // Populate house options based on selected estate
+    selectedProperty && fetchHouses(selectedProperty.id);
+  };
+
+  const handleHouseSelection = (selectedOption: string) => {
+    const selectedHouse = houses.find(
+      (house: House) => house.address === selectedOption
+    );
+    setValue("house", (selectedHouse && selectedHouse.id) || "");
+  };
+
+  // Fetch houses based on selected property
+  // Memoize the fetchHouses function to avoid unnecessary re-creations
+  const fetchHouses = useCallback(async (propertyId: string) => {
+    try {
+      const { data } = await houseApi.getHouses(propertyId);
+      if (data) {
+        setHouses(data);
+      }
+    } catch (error) {
+      ErrorHandler(error);
+    }
+  }, []);
+
   return (
     <div className="w-full h-screen ">
       {loading && (
@@ -94,31 +136,36 @@ const FinishSignUp = () => {
                     Complete your details
                   </div>
                   <div className="text-center">
-                    Enter your resiidential information to use services tailored
+                    Enter your residential information to use services tailored
                     for you
                   </div>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="w-2/5 mx-auto"
+                >
                   <div className="mt-10 flex w-full mx-auto items-start flex-col gap-5">
-                    <div className="w-full text-left">
-                      <Input
-                        {...register("house_address")}
-                        label="House address"
-                        placeholder="Enter your house address"
-                        error={
-                          errors.house_address && errors.house_address?.message
-                        }
-                      />
-                    </div>
                     <div className="w-full pt-1">
                       <CustomSelect
-                        label={`Select estate`}
+                        label={`Select Estate/Apartment`}
                         options={estateOptions}
-                        onSelect={(value) => setValue("estate", value)}
+                        onSelect={handleEstateSelection}
                       />
                       {errors.estate && (
                         <p className="text-red-500 text-sm mt-1">
                           {errors.estate?.message}
+                        </p>
+                      )}
+                    </div>
+                    <div className="w-full pt-1">
+                      <CustomSelect
+                        label={`Select House/Flat`}
+                        options={houses.map((house) => house.address)}
+                        onSelect={handleHouseSelection}
+                      />
+                      {errors.house && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.house?.message}
                         </p>
                       )}
                     </div>

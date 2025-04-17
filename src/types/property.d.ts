@@ -1,11 +1,17 @@
-export enum HouseType {
-  MANSION = "mansion",
-  DUPLEX = "duplex",
-  BUNGALOW = "bungalow",
-  FLAT = "flat",
-  PENTHOUSE = "penthouse",
-  TERRACE = "terrace",
-  SEMI_DETACHED = "semi_detached",
-  DETACHED = "detached",
-  TRADITIONAL = "traditional",
+export enum PropertyType {
+  ESTATE = "estate",
+  APARTMENT = "apartment",
+}
+
+export interface Property {
+  id: string;
+  name: string;
+  type: PropertyType;
+  address: string;
+  city: string;
+  state: string;
+  country: string;
+  authorId: string;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import logo from "../../assets/generalImages/miraton-logo.png";
 import imageframe from "../../assets/generalImages/signin_frame.png";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,6 +11,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Button from "@/components/shared/Button";
 import userApi from "@/api/userApi";
+import { usePropertyStore } from "@/store/usePropertyStore";
+import propertyApi from "@/api/propertyApi";
+import { ErrorHandler } from "@/utils/logger/errorLogger";
 
 const VerifyEmail = () => {
   const {
@@ -22,7 +25,7 @@ const VerifyEmail = () => {
     resolver: zodResolver(verifyOtpSchema),
   });
   const location = useLocation();
-
+  const setProperties = usePropertyStore((state) => state.setProperties);
   // Parse the query parameters
   const queryParams = new URLSearchParams(location.search);
   const email = queryParams.get("email"); // Retrieve the email parameter
@@ -34,6 +37,22 @@ const VerifyEmail = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Memoize the fetchProperties function to avoid unnecessary re-creations
+  const fetchProperties = useCallback(async () => {
+    try {
+      const res = await propertyApi.getProperties();
+      if (res.data) {
+        setProperties(res.data);
+      }
+    } catch (error) {
+      ErrorHandler(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProperties();
+  }, [fetchProperties]);
+
   const onSubmit = async (data: VerifyOtpValues) => {
     setLoading(true);
     try {
@@ -44,6 +63,7 @@ const VerifyEmail = () => {
       }
       navigate(`/finish_up?email=${encodeURIComponent(email || "")}`);
     } catch (error) {
+      ErrorHandler(error);
     } finally {
       setLoading(false);
     }
@@ -94,7 +114,7 @@ const VerifyEmail = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col w-full items-start gap-5 mt-6">
+              <div className="flex flex-col w-full items-center gap-5 mt-6">
                 <div className="w-full text-left">
                   <Input
                     {...register("otp")}

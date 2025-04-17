@@ -7,6 +7,7 @@ import {
 } from "@/types/auth";
 import { ClientPostApi } from "./clients";
 import { User } from "@/types/user";
+import { FinishSignupValues } from "@/utils/validator/finishSignup";
 
 export interface RegisterUser {
   firstName: string;
@@ -44,10 +45,27 @@ const authApi = {
     return response;
   },
 
-  changePassword: async (email: string, token: string, newPassword: string): Promise<ApiResponse> => {
-    const response = await ClientPostApi(`/reset-password`, { email, token, newPassword });
+  changePassword: async (
+    email: string,
+    token: string,
+    newPassword: string
+  ): Promise<ApiResponse> => {
+    const response = await ClientPostApi(`/reset-password`, {
+      email,
+      token,
+      newPassword,
+    });
     return response;
-  }
+  },
+  addHouseDetails: async (data: FinishSignupValues): Promise<ApiResponse> => {
+    const response = await ClientPostApi(`/users/add-meter`, {
+      propertyId: data.estate,
+      houseId: data.house,
+      email: data.email,
+      number: data.meter_number,
+    });
+    return response;
+  },
 };
 
 export default authApi;

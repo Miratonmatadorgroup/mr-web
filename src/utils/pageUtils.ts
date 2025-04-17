@@ -16,10 +16,11 @@ export const MoveToTop = () => {
 
 export const ErrorMessage = (message: string | undefined) => {
   return toast.error(message, {
-    position: "top-center",
+    position: "bottom-center",
     style: {
       backgroundColor: "#dc2626", 
       color: "#ffffff", 
+      border: "1px solid #dc2626",
     },
   });
 };
